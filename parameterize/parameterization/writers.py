@@ -179,7 +179,7 @@ def writeFRCMOD(mol, parameters, filename, typemap=None):
 
 def writePRM(mol, parameters, filename):
     from parameterize.version import version as parameterizeversion
-    from htmd.util import ensurelist
+    from parameterize.util import ensurelist
 
     # for type, val in parameters.atom_types.items():
     #     if val.epsilon_14 != 1.0:

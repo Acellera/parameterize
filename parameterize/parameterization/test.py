@@ -12,7 +12,7 @@ from subprocess import call
 import numpy as np
 
 from parameterize.home import home
-from htmd.util import tempname
+from parameterize.util import tempname
 
 
 class _TestParameterize(unittest.TestCase):
