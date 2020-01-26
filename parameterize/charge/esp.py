@@ -243,7 +243,7 @@ class ESP:
     >>> from parameterize.charge.esp import ESP
     >>> esp = ESP()
     >>> esp # doctest: +ELLIPSIS
-    <htmd.charge.esp.ESP object at 0x...>
+    <parameterize.charge.esp.ESP object at 0x...>
     >>> esp.molecule = mol
     >>> esp.qm_results = qm_results
     >>> esp_results = esp.run()

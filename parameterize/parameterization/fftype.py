@@ -73,9 +73,9 @@ def fftype(
         Path to a PRM file from which to read the parameters
     method : str
         Atomtyping assignment method.
-        Use :func:`fftype.listFftypemethods <htmd.parameterization.fftype.listFftypemethods>` to get a list of available
+        Use :func:`fftype.listFftypemethods <parameterize.parameterization.fftype.listFftypemethods>` to get a list of available
         methods.
-        Default: :func:`fftype.defaultFftypemethod <htmd.parameterization.fftype.defaultFftypemethod>`
+        Default: :func:`fftype.defaultFftypemethod <parameterize.parameterization.fftype.defaultFftypemethod>`
     acCharges : str
         Optionally assign charges with antechamber. Check `antechamber -L` for available options.
         Note: only works for GAFF and GAFF2.
@@ -444,7 +444,7 @@ class _TestFftypeCGenFF(unittest.TestCase):
 
             for testFile in ("cgenff.rtf", "cgenff.prm"):
                 with self.subTest(testFile=testFile):
-                    # Get rid of the first linw with HTMD version string
+                    # Get rid of the first linw with parameterize version string
                     with open(os.path.join(refDir, testFile)) as refFile:
                         refData = refFile.readlines()[1:]
                     with open(os.path.join(resDir, testFile)) as resFile:

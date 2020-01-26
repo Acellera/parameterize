@@ -60,7 +60,7 @@ class TeraChem(QMBase):
     >>> from parameterize.qm import TeraChem
     >>> qm = TeraChem()
     >>> qm # doctest: +ELLIPSIS
-    <htmd.qm.terachem.TeraChem object at 0x...>
+    <parameterize.qm.terachem.TeraChem object at 0x...>
 
     Run single-point QM calculation of H2 with BLYP and cc-pVDZ
     >>> from tempfile import TemporaryDirectory
@@ -71,9 +71,9 @@ class TeraChem(QMBase):
     ...     qm.directory = tmp
     ...     result = qm.run()
 
-    The QM results are returned as a list of htmd.qm.QMResult objects. See htmd.qm.QMResult documentation for details.
+    The QM results are returned as a list of parameterize.qm.QMResult objects. See parameterize.qm.QMResult documentation for details.
     >>> result # doctest: +ELLIPSIS
-    [<htmd.qm.base.QMResult object at 0x...>]
+    [<parameterize.qm.base.QMResult object at 0x...>]
     >>> result[0].errored
     False
     >>> result[0].energy # doctest: +ELLIPSIS

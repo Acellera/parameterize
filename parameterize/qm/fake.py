@@ -53,9 +53,9 @@ class FakeQM(QMBase):
     ...     result = qm.run()[0]
 
     >>> qm # doctest: +ELLIPSIS
-    <htmd.qm.fake.FakeQM object at ...>
+    <parameterize.qm.fake.FakeQM object at ...>
     >>> result # doctest: +ELLIPSIS
-    <htmd.qm.base.QMResult object at ...
+    <parameterize.qm.base.QMResult object at ...
     >>> result.errored
     False
     >>> result.energy # doctest: +ELLIPSIS
@@ -224,9 +224,9 @@ class FakeQM2(FakeQM):
     ...     result = qm.run()[0]
 
     >>> qm # doctest: +ELLIPSIS
-    <htmd.qm.fake.FakeQM2 object at ...>
+    <parameterize.qm.fake.FakeQM2 object at ...>
     >>> result # doctest: +ELLIPSIS
-    <htmd.qm.base.QMResult object at ...
+    <parameterize.qm.base.QMResult object at ...
     >>> result.errored
     False
     >>> result.energy # doctest: +ELLIPSIS
@@ -267,7 +267,10 @@ class FakeQM2(FakeQM):
     """
 
     def _get_prmtop(self):
-        from parameterize.parameterization.writers import writeFRCMOD, getAtomTypeMapping
+        from parameterize.parameterization.writers import (
+            writeFRCMOD,
+            getAtomTypeMapping,
+        )
 
         with TemporaryDirectory() as tmpDir:
             frcFile = os.path.join(tmpDir, "mol.frcmod")

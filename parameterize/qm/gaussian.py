@@ -14,7 +14,7 @@ class Gaussian(QMBase):
     """
     Class to set up and run QM calculations with Gaussian
 
-   See htmd.qm.Psi4 documentation for more details.
+   See parameterize.qm.Psi4 documentation for more details.
 
     Examples
     --------
@@ -23,7 +23,7 @@ class Gaussian(QMBase):
     >>> from parameterize.qm import Gaussian
     >>> qm = Gaussian()
     >>> qm # doctest: +ELLIPSIS
-    <htmd.qm.gaussian.Gaussian object at 0x...>
+    <parameterize.qm.gaussian.Gaussian object at 0x...>
     """
 
     @property

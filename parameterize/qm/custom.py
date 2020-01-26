@@ -73,7 +73,10 @@ class OMMMinimizer(Minimizer):
         )
 
     def _get_prmtop(self, mol, prm):
-        from parameterize.parameterization.writers import writeFRCMOD, getAtomTypeMapping
+        from parameterize.parameterization.writers import (
+            writeFRCMOD,
+            getAtomTypeMapping,
+        )
         from tempfile import TemporaryDirectory
         from subprocess import call
         from simtk.openmm import app
@@ -270,9 +273,9 @@ class CustomQM(QMBase):
     CUDA: Allocating features array (1, 4, 384)
     CUDA: Allocating gradient array (1, 4, 4, 384, 3)
     >>> qm # doctest: +ELLIPSIS
-    <htmd.qm.custom.CustomCalculator object at ...>
+    <parameterize.qm.custom.CustomCalculator object at ...>
     >>> result # doctest: +ELLIPSIS
-    <htmd.qm.base.QMResult object at ...
+    <parameterize.qm.base.QMResult object at ...
     >>> result.errored
     False
     >>> result.energy # doctest: +ELLIPSIS
