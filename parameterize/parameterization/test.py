@@ -11,7 +11,7 @@ from subprocess import call
 
 import numpy as np
 
-from htmd.home import home
+from parameterize.home import home
 from htmd.util import tempname
 
 

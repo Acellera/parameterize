@@ -187,7 +187,7 @@ def _getEquivalentDihedrals(mol, equivalents, dihedral):
 
 class _Test(unittest.TestCase):
     def setUp(self):
-        from htmd.home import home
+        from parameterize.home import home
         from moleculekit.molecule import Molecule
         from parameterize.parameterization.detect import detectEquivalentAtoms
         from parameterize.parameterization.fftype import fftype

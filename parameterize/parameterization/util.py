@@ -260,7 +260,7 @@ def guessBondType(mol):
 
     Examples
     --------
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
 
     >>> molFile = os.path.join(home('test-qm'), 'H2O.mol2')
@@ -351,7 +351,7 @@ def makeAtomNamesUnique(mol):
 
     Examples
     --------
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
     >>> molFile = os.path.join(home('test-param'), 'H2O2.mol2')
     >>> mol = Molecule(molFile)
@@ -424,7 +424,7 @@ def detectChiralCenters(mol, atom_types=None):
 
     Examples
     --------
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
 
     >>> molFile = os.path.join(home('test-param'), 'H2O2.mol2')

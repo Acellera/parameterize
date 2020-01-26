@@ -31,7 +31,7 @@ def fitGasteigerCharges(mol, atom_types=None):
 
     Examples
     --------
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
     >>> molFile = os.path.join(home('test-charge'), 'H2O.mol2')
     >>> mol = Molecule(molFile)
@@ -94,7 +94,7 @@ def fitChargesWithAntechamber(mol, type="gas", molCharge=None):
 
     Examples
     --------
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
     >>> molFile = os.path.join(home('test-charge'), 'H2O.mol2')
     >>> mol = Molecule(molFile)
@@ -208,7 +208,7 @@ def fitESPCharges(mol, qm, outdir, apply_bounds=True, restraint_factor=0, fixed=
 
     Examples
     --------
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
     >>> molFile = os.path.join(home('test-charge'), 'H2O.mol2')
     >>> mol = Molecule(molFile)
@@ -303,7 +303,7 @@ def symmetrizeCharges(mol):
 
     Examples
     --------
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
     >>> molFile = os.path.join(home('test-charge'), 'H2O.mol2')
     >>> mol = Molecule(molFile)
@@ -343,7 +343,7 @@ if __name__ == "__main__":
     import doctest
 
     # Prevent HTMD importing inside doctest to fail if importing gives text output
-    from htmd.home import home
+    from parameterize.home import home
 
     home()
 

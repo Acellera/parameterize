@@ -27,7 +27,7 @@ def _getMolecularGraph(molecule):
 
 def fixPhosphateTypes(molecule):
     """
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
     >>> from parameterize.charge import fitGasteigerCharges
 
@@ -171,7 +171,7 @@ if __name__ == "__main__":
     import doctest
 
     # Prevent HTMD importing inside doctest to fail if importing gives text output
-    from htmd.home import home
+    from parameterize.home import home
 
     home()
 

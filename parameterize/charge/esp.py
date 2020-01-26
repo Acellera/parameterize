@@ -61,7 +61,7 @@ class MoleculeGrid:
 
     Load water molecule
     >>> import os
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
     >>> molFile = os.path.join(home('test-charge'), 'H2O.mol2')
     >>> mol = Molecule(molFile, guessNE='bonds', guess=('angles', 'dihedrals'))
@@ -217,7 +217,7 @@ class ESP:
 
     Load water molecule
     >>> import os
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
     >>> molFile = os.path.join(home('test-charge'), 'H2O.mol2')
     >>> mol = Molecule(molFile, guessNE='bonds', guess=('angles', 'dihedrals'))
@@ -429,7 +429,7 @@ class ESP:
 
 class _TestESP(unittest.TestCase):
     def setUp(self):
-        from htmd.home import home
+        from parameterize.home import home
         from moleculekit.molecule import Molecule
 
         molFile = os.path.join(home("test-param"), "H2O2.mol2")

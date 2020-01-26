@@ -10,7 +10,7 @@ import unittest
 
 import numpy as np
 
-from htmd.home import home
+from parameterize.home import home
 from moleculekit.molecule import Molecule
 from parameterize.qm import Psi4
 from parameterize.charge import fitGasteigerCharges, fitChargesWithAntechamber, fitESPCharges

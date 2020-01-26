@@ -101,7 +101,7 @@ def detectEquivalentAtoms(molecule):
     --------
 
     >>> import os
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
     >>> from parameterize.parameterization.detect import detectEquivalentAtoms
 
@@ -307,7 +307,7 @@ def detectParameterizableDihedrals(molecule):
     --------
 
     >>> import os
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.molecule import Molecule
     >>> from parameterize.parameterization.detect import detectParameterizableDihedrals
 
@@ -421,7 +421,7 @@ if __name__ == "__main__":
     import doctest
 
     # Prevent HTMD importing inside doctest to fail if importing gives text output
-    from htmd.home import home
+    from parameterize.home import home
 
     home()
 

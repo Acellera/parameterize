@@ -8,7 +8,7 @@ import unittest
 from tempfile import TemporaryDirectory
 import numpy as np
 
-from htmd.home import home
+from parameterize.home import home
 from parameterize.qm.base import QMBase
 from parameterize.qm import Psi4, TeraChem, Gaussian
 from jobqueues.localqueue import LocalCPUQueue

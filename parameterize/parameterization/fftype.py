@@ -278,7 +278,7 @@ def fftype(
 
 class _TestFftypeGAFF(unittest.TestCase):
     def setUp(self):
-        from htmd.home import home
+        from parameterize.home import home
 
         self.refDir = home(dataDir="test-fftype")
 
@@ -425,15 +425,15 @@ class _TestFftypeCGenFF(unittest.TestCase):
 
         self.maxDiff = None
 
-        from htmd.home import home
+        from parameterize.home import home
         from moleculekit.molecule import Molecule
 
-        molFile = os.path.join(home("building-protein-ligand"), "benzamidine.mol2")
+        molFile = os.path.join(home("test-fftype"), "benzamidine.mol2")
         self.mol = Molecule(molFile, guessNE=["bonds"], guess=["angles", "dihedrals"])
 
     def test_rtf_prm(self):
 
-        from htmd.home import home
+        from parameterize.home import home
         from parameterize.parameterization.writers import writeRTF, writePRM
 
         refDir = home(dataDir="test-fftype/benzamidine")

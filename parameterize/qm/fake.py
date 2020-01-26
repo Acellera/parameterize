@@ -32,7 +32,7 @@ class FakeQM(QMBase):
     >>> import os
     >>> import numpy as np
     >>> from tempfile import TemporaryDirectory
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.dihedral import dihedralAngle
     >>> from parameterize.parameterization.fftype import fftype
     >>> from moleculekit.molecule import Molecule
@@ -203,7 +203,7 @@ class FakeQM2(FakeQM):
     >>> import os
     >>> import numpy as np
     >>> from tempfile import TemporaryDirectory
-    >>> from htmd.home import home
+    >>> from parameterize.home import home
     >>> from moleculekit.dihedral import dihedralAngle
     >>> from parameterize.parameterization.fftype import fftype
     >>> from moleculekit.molecule import Molecule
