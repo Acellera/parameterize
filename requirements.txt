@@ -1,1 +1,16 @@
 numpy>=1.17
+htmd  # Remove this dep once we separate ffevaluate and playqueue from HTMD
+jobqueues
+moleculekit
+networkx
+matplotlib
+sklearn # Only used for linear regression. consider getting rid
+parmed
+scipy  # Check how necessary
+pyyaml
+openmm # Check how necessary
+psi4
+rdkit
+nlopt
+match
+dftd3
