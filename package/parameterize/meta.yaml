@@ -8,22 +8,22 @@ source:
 build:
   number: {{ environ.get('BUILD_NUMBER', 0 ) }}
 
+  script_env:
+   - OSNAME
+
+  entry_points:
+    - parameterize = parameterize.parameterization.cli:main_parameterize
+
 requirements:
-  host:
-    - python
-DEPENDENCY_PLACEHOLDER
+  build:
+    - python 
+    - requests
+    
   run:
-    - python
+    - python 
 DEPENDENCY_PLACEHOLDER
 
 about:
-  home: https://github.com/acellera/parameterize/
+  home: https://www.acellera.com
   license: "HTMD Software License version 1.1"
   license_file: HTMD_LICENCE.txt
-  summary: Small molecule parameterization
-  doc_url: 
-  dev_url: 
-
-extra:
-  recipe-maintainers:
-    - stefdoerr
