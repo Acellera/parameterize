@@ -1,0 +1,16 @@
+@<TRIPOS>MOLECULE
+    UNL
+    4     3     0     0     0
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 Oa          1.0019    0.0734   -0.2426 zb         1 UNL     -0.252800
+      2 Ob          2.4799    0.1075   -0.2082 zb         1 UNL     -0.252800
+      3 Hc          0.8571   -0.8821   -0.1148 za         1 UNL      0.252800
+      4 Hd          2.6145    0.4815    0.6818 za         1 UNL      0.252800
+@<TRIPOS>BOND
+     1    1    2 un
+     2    1    3 un
+     3    2    4 un

@@ -1,0 +1,80 @@
+Too many bad steps.
+Too many bad steps.
+Too many bad steps.
+Too many bad steps.
+Too many bad steps.
+Too many bad steps.
+Too many bad steps.
+Optimizer: Optimization failed!
+Traceback (most recent call last):
+  File "/shared/joao/test_parameterize/miniconda3/bin/psi4", line 269, in <module>
+    exec(content)
+  File "<string>", line 54, in <module>
+  File "/shared/joao/test_parameterize/miniconda3/lib//python3.6/site-packages/psi4/driver/driver.py", line 1220, in optimize
+    raise OptimizationConvergenceError("""geometry optimization""", n - 1, wfn)
+
+OptimizationConvergenceError: Could not converge geometry optimization in 63 iterations.
+At level 1: Red. Int., RFO, no backsteps, dynamic trust
+At level 1: Red. Int., RFO, no backsteps, dynamic trust
+At level 1: Red. Int., RFO, no backsteps, dynamic trust
+At level 1: Red. Int., RFO, no backsteps, dynamic trust
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 2: Red. Int., RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 3: Red. Int. + XYZ, RFO, backsteps, smaller trust.
+At level 4: XYZ, RFO, backsteps, larger trust.
+At level 4: XYZ, RFO, backsteps, larger trust.
+At level 4: XYZ, RFO, backsteps, larger trust.
+At level 4: XYZ, RFO, backsteps, larger trust.
+At level 4: XYZ, RFO, backsteps, larger trust.
+At level 4: XYZ, RFO, backsteps, larger trust.
+At level 5: XYZ, RFO, backsteps, medium trust.
+At level 5: XYZ, RFO, backsteps, medium trust.
+At level 5: XYZ, RFO, backsteps, medium trust.
+At level 5: XYZ, RFO, backsteps, medium trust.
+At level 5: XYZ, RFO, backsteps, medium trust.
+At level 5: XYZ, RFO, backsteps, medium trust.
+At level 5: XYZ, RFO, backsteps, medium trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+At level 5: XYZ, SD, backsteps, larger trust.
+Moving to level 6: XYZ, SD, backsteps, small trust, smaller steps.
+Moving to level 6: XYZ, SD, backsteps, small trust, smaller steps.
+Moving to level 6: XYZ, SD, backsteps, small trust, smaller steps.
+Moving to level 6: XYZ, SD, backsteps, small trust, smaller steps.
+Moving to level 6: XYZ, SD, backsteps, small trust, smaller steps.
+Moving to level 6: XYZ, SD, backsteps, small trust, smaller steps.
+Moving to level 6: XYZ, SD, backsteps, small trust, smaller steps.
+Moving to level 6: XYZ, SD, backsteps, small trust, smaller steps.

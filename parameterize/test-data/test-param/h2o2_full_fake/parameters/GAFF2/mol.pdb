@@ -1,0 +1,11 @@
+MODEL        1
+HETATM    1  Oa  UNL     1       1.002   0.073  -0.243  0.00  0.00      L    O  
+HETATM    2  Ob  UNL     1       2.480   0.108  -0.208  0.00  0.00      L    O  
+HETATM    3  Hc  UNL     1       0.857  -0.882  -0.115  0.00  0.00      L    H  
+HETATM    4  Hd  UNL     1       2.614   0.481   0.682  0.00  0.00      L    H  
+CONECT    1    2    3
+CONECT    2    1    4
+CONECT    3    1
+CONECT    4    2
+ENDMDL
+END

@@ -1,0 +1,100 @@
+
+Host: green.prib.upf.edu
+
+Timers On : Sat Sep 29 20:31:20 2018
+Timers Off: Sat Sep 29 20:34:40 2018
+
+Wall Time:      199.42 seconds
+
+V: Grid                     :     19.600u      0.083s     11.822w      7 calls
+JK: (A|mn)                  :     41.117u      0.000s      6.170w      7 calls
+JK: (A|Q)^-1/2              :     20.600u      0.300s      3.133w      7 calls
+JK: (Q|mn)                  :     20.800u      0.033s      3.123w      7 calls
+HF: Form H                  :      1.717u      0.050s      0.355w      7 calls
+HF: Form S/X                :      0.250u      0.000s      0.038w      7 calls
+HF: Guess                   :      2.633u      0.050s      0.402w      7 calls
+SAD Guess                   :      2.617u      0.033s      0.398w      1 calls
+HF: Form G                  :    775.467u      2.867s    116.786w     79 calls
+RV: Form V                  :    684.750u      1.883s    103.014w     79 calls
+Properties                  :    270.940p                         259480 calls
+Functional                  :     46.719p                         259480 calls
+V_xc                        :    131.233p                         238356 calls
+JK: D                       :      0.017u      0.000s      0.007w     79 calls
+JK: USO2AO                  :      0.050u      0.000s      0.004w     79 calls
+JK: JK                      :     90.500u      0.983s     13.740w     79 calls
+JK: J                       :      4.850u      0.033s      0.731w     79 calls
+JK: J1                      :      2.333u      0.017s      0.355w     79 calls
+JK: J2                      :      2.467u      0.000s      0.365w     79 calls
+JK: K                       :     81.300u      0.083s     12.223w     79 calls
+JK: K1                      :     61.300u      0.033s      9.201w     79 calls
+JK: K2                      :     20.000u      0.050s      3.019w     79 calls
+JK: AO2USO                  :      0.000u      0.000s      0.000w     79 calls
+HF: Form F                  :      0.033u      0.000s      0.005w     79 calls
+HF: DIIS                    :      1.133u      0.133s      0.194w     79 calls
+DIISManager::add_entry      :      0.217u      0.033s      0.045w     72 calls
+DIISManager::extrapolate    :      0.350u      0.067s      0.068w     65 calls
+bMatrix setup               :      0.117u      0.050s      0.027w     65 calls
+bMatrix pseudoinverse       :      0.000u      0.000s      0.005w     65 calls
+New vector                  :      0.233u      0.017s      0.034w     65 calls
+HF: Form C                  :      3.100u      0.067s      0.463w     79 calls
+HF: Form D                  :      0.000u      0.000s      0.005w     79 calls
+Grad: V T Perturb           :     10.667u      0.383s      1.659w      7 calls
+Grad: S                     :      0.117u      0.000s      0.011w      7 calls
+Grad: JK                    :    165.800u      1.850s     25.365w      7 calls
+JKGrad: Amn                 :     29.267u      0.533s      4.602w      7 calls
+JKGrad: Awmn                :      0.000u      0.000s      0.000w      7 calls
+JKGrad: AB                  :     23.033u      0.350s      3.506w      7 calls
+JKGrad: UV                  :      2.350u      0.117s      0.375w      7 calls
+JKGrad: ABx                 :      5.417u      0.133s      0.831w      7 calls
+JKGrad: Amnx                :    101.167u      0.483s     15.248w      7 calls
+Grad: XC                    :    134.533u      0.183s     20.214w      7 calls
+V_xc gradient               :     39.742p                          21124 calls
+
+-----------------------------------------------------------
+V: Grid                     :     19.600u      0.083s     11.822w      7 calls
+JK: (A|mn)                  :     41.117u      0.000s      6.170w      7 calls
+JK: (A|Q)^-1/2              :     20.600u      0.300s      3.133w      7 calls
+JK: (Q|mn)                  :     20.800u      0.033s      3.123w      7 calls
+HF: Form H                  :      1.717u      0.050s      0.355w      7 calls
+HF: Form S/X                :      0.250u      0.000s      0.038w      7 calls
+HF: Guess                   :      2.633u      0.050s      0.402w      7 calls
+| SAD Guess                 :      2.617u      0.033s      0.398w      1 calls
+HF: Form G                  :    775.467u      2.867s    116.786w     79 calls
+| RV: Form V                :    684.750u      1.883s    103.014w     79 calls
+| | Properties              :    235.684p                         238356 calls
+| | Functional              :     42.840p                         238356 calls
+| | V_xc                    :    131.233p                         238356 calls
+| JK: D                     :      0.017u      0.000s      0.007w     79 calls
+| JK: USO2AO                :      0.050u      0.000s      0.004w     79 calls
+| JK: JK                    :     90.500u      0.983s     13.740w     79 calls
+| | JK: J                   :      4.850u      0.033s      0.731w     79 calls
+| | | JK: J1                :      2.333u      0.017s      0.355w     79 calls
+| | | JK: J2                :      2.467u      0.000s      0.365w     79 calls
+| | JK: K                   :     81.300u      0.083s     12.223w     79 calls
+| | | JK: K1                :     61.300u      0.033s      9.201w     79 calls
+| | | JK: K2                :     20.000u      0.050s      3.019w     79 calls
+| JK: AO2USO                :      0.000u      0.000s      0.000w     79 calls
+HF: Form F                  :      0.033u      0.000s      0.005w     79 calls
+HF: DIIS                    :      1.133u      0.133s      0.194w     79 calls
+| DIISManager::add_entry    :      0.217u      0.033s      0.045w     72 calls
+| DIISManager::extrapolate  :      0.350u      0.067s      0.068w     65 calls
+| | bMatrix setup           :      0.117u      0.050s      0.027w     65 calls
+| | bMatrix pseudoinverse   :      0.000u      0.000s      0.005w     65 calls
+| | New vector              :      0.233u      0.017s      0.034w     65 calls
+HF: Form C                  :      3.100u      0.067s      0.463w     79 calls
+HF: Form D                  :      0.000u      0.000s      0.005w     79 calls
+Grad: V T Perturb           :     10.667u      0.383s      1.659w      7 calls
+Grad: S                     :      0.117u      0.000s      0.011w      7 calls
+Grad: JK                    :    165.800u      1.850s     25.365w      7 calls
+| JKGrad: Amn               :     29.267u      0.533s      4.602w      7 calls
+| JKGrad: Awmn              :      0.000u      0.000s      0.000w      7 calls
+| JKGrad: AB                :     23.033u      0.350s      3.506w      7 calls
+| JKGrad: UV                :      2.350u      0.117s      0.375w      7 calls
+| JKGrad: ABx               :      5.417u      0.133s      0.831w      7 calls
+| JKGrad: Amnx              :    101.167u      0.483s     15.248w      7 calls
+Grad: XC                    :    134.533u      0.183s     20.214w      7 calls
+| Properties                :     35.255p                          21124 calls
+| Functional                :      3.879p                          21124 calls
+| V_xc gradient             :     39.742p                          21124 calls
+
+***********************************************************

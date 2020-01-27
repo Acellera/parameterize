@@ -1,0 +1,74 @@
+
+Host: loro.prib.upf.edu
+
+Timers On : Sat Sep 29 16:50:20 2018
+Timers Off: Sat Sep 29 16:50:36 2018
+
+Wall Time:       16.63 seconds
+
+V: Grid                     :      0.700u      0.033s      0.586w      1 calls
+DFH: initialize()           :      0.617u      0.033s      0.393w      1 calls
+DFH: sparsity prep          :      0.050u      0.017s      0.030w      1 calls
+DFH: AO Construction        :      0.333u      0.000s      0.210w      1 calls
+DFH: AO-Met. Contraction    :      0.100u      0.017s      0.071w      1 calls
+HF: Form H                  :      0.017u      0.000s      0.064w      1 calls
+HF: Form S/X                :      0.000u      0.000s      0.001w      1 calls
+HF: Guess                   :      0.167u      0.017s      0.159w      1 calls
+SAD Guess                   :      0.167u      0.017s      0.156w      1 calls
+HF: Form G                  :     17.500u      0.200s     12.154w      9 calls
+RV: Form V                  :     17.183u      0.200s     11.943w      9 calls
+Properties                  :      9.450u      0.150s      6.778w  15795 calls
+Functional                  :      3.233u      0.000s      2.137w  15795 calls
+V_xc                        :      4.100u      0.050s      2.857w  15795 calls
+JK: D                       :      0.017u      0.000s      0.000w      9 calls
+JK: USO2AO                  :      0.000u      0.000s      0.000w      9 calls
+JK: JK                      :      0.300u      0.000s      0.210w      9 calls
+DFH: compute_JK()           :      0.300u      0.000s      0.210w      9 calls
+DFH: Grabbing AOs           :      0.000u      0.000s      0.000w      9 calls
+DFH: compute_J              :      0.067u      0.000s      0.046w      9 calls
+DFH: compute_K              :      0.233u      0.000s      0.164w      9 calls
+JK: AO2USO                  :      0.000u      0.000s      0.000w      9 calls
+HF: Form F                  :      0.000u      0.000s      0.000w      9 calls
+HF: DIIS                    :      0.017u      0.000s      0.009w      9 calls
+DIISManager::add_entry      :      0.000u      0.000s      0.003w      8 calls
+DIISManager::extrapolate    :      0.000u      0.000s      0.003w      7 calls
+bMatrix setup               :      0.000u      0.000s      0.001w      7 calls
+bMatrix pseudoinverse       :      0.000u      0.000s      0.000w      7 calls
+New vector                  :      0.000u      0.000s      0.001w      7 calls
+HF: Form C                  :      0.017u      0.000s      0.013w      9 calls
+HF: Form D                  :      0.000u      0.000s      0.000w      9 calls
+
+-----------------------------------------------------------
+V: Grid                     :      0.700u      0.033s      0.586w      1 calls
+DFH: initialize()           :      0.617u      0.033s      0.393w      1 calls
+| DFH: sparsity prep        :      0.050u      0.017s      0.030w      1 calls
+| DFH: AO Construction      :      0.333u      0.000s      0.210w      1 calls
+| DFH: AO-Met. Contraction  :      0.100u      0.017s      0.071w      1 calls
+HF: Form H                  :      0.017u      0.000s      0.064w      1 calls
+HF: Form S/X                :      0.000u      0.000s      0.001w      1 calls
+HF: Guess                   :      0.167u      0.017s      0.159w      1 calls
+| SAD Guess                 :      0.167u      0.017s      0.156w      1 calls
+HF: Form G                  :     17.500u      0.200s     12.154w      9 calls
+| RV: Form V                :     17.183u      0.200s     11.943w      9 calls
+| | Properties              :      9.450u      0.150s      6.778w  15795 calls
+| | Functional              :      3.233u      0.000s      2.137w  15795 calls
+| | V_xc                    :      4.100u      0.050s      2.857w  15795 calls
+| JK: D                     :      0.017u      0.000s      0.000w      9 calls
+| JK: USO2AO                :      0.000u      0.000s      0.000w      9 calls
+| JK: JK                    :      0.300u      0.000s      0.210w      9 calls
+| | DFH: compute_JK()       :      0.300u      0.000s      0.210w      9 calls
+| | | DFH: Grabbing AOs     :      0.000u      0.000s      0.000w      9 calls
+| | | DFH: compute_J        :      0.067u      0.000s      0.046w      9 calls
+| | | DFH: compute_K        :      0.233u      0.000s      0.164w      9 calls
+| JK: AO2USO                :      0.000u      0.000s      0.000w      9 calls
+HF: Form F                  :      0.000u      0.000s      0.000w      9 calls
+HF: DIIS                    :      0.017u      0.000s      0.009w      9 calls
+| DIISManager::add_entry    :      0.000u      0.000s      0.003w      8 calls
+| DIISManager::extrapolate  :      0.000u      0.000s      0.003w      7 calls
+| | bMatrix setup           :      0.000u      0.000s      0.001w      7 calls
+| | bMatrix pseudoinverse   :      0.000u      0.000s      0.000w      7 calls
+| | New vector              :      0.000u      0.000s      0.001w      7 calls
+HF: Form C                  :      0.017u      0.000s      0.013w      9 calls
+HF: Form D                  :      0.000u      0.000s      0.000w      9 calls
+
+***********************************************************

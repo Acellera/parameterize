@@ -1,0 +1,10 @@
+
+== Diagnostic Energies ==
+
+Bond     :      5.91752 kcal/mol
+Angle    :      2.96162 kcal/mol
+Dihedral :      2.67384 kcal/mol
+Improper :      0.00697 kcal/mol
+Electro  :     15.43281 kcal/mol
+VdW      :      4.62944 kcal/mol
+

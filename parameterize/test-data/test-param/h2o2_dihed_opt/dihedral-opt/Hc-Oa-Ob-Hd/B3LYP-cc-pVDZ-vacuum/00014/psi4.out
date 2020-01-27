@@ -1,0 +1,2522 @@
+
+    -----------------------------------------------------------------------
+          Psi4: An Open-Source Ab Initio Electronic Structure Package
+                               Psi4 1.2.1 release
+
+                         Git: Rev {HEAD} 406f4de 
+
+
+    R. M. Parrish, L. A. Burns, D. G. A. Smith, A. C. Simmonett,
+    A. E. DePrince III, E. G. Hohenstein, U. Bozkaya, A. Yu. Sokolov,
+    R. Di Remigio, R. M. Richard, J. F. Gonthier, A. M. James,
+    H. R. McAlexander, A. Kumar, M. Saitow, X. Wang, B. P. Pritchard,
+    P. Verma, H. F. Schaefer III, K. Patkowski, R. A. King, E. F. Valeev,
+    F. A. Evangelista, J. M. Turney, T. D. Crawford, and C. D. Sherrill,
+    J. Chem. Theory Comput. 13(7) pp 3185--3197 (2017).
+    (doi: 10.1021/acs.jctc.7b00174)
+
+
+                         Additional Contributions by
+    P. Kraus, H. Kruse, M. H. Lechner, M. C. Schieber, and R. A. Shaw
+
+    -----------------------------------------------------------------------
+
+
+    Psi4 started on: Saturday, 29 September 2018 04:37PM
+
+    Process ID: 30295
+    Host:       loro.prib.upf.edu
+    PSIDATADIR: /shared/joao/test_parameterize/miniconda3/share/psi4
+    Memory:     500.0 MiB
+    Threads:    1
+    
+  ==> Input File <==
+
+--------------------------------------------------------------------------
+set_num_threads(1)
+set_memory('5348 MB')
+
+set { scf_mem_safety_factor 0.7 }
+
+set { reference rks }
+set { basis cc-pVDZ }
+
+molecule MOL {
+    0 1
+    noreorient
+    nocom
+    symmetry c1
+    O    1.014300  -0.002300   0.060500
+    O    2.462400  -0.107500  -0.002400
+    H    0.821200  -0.823600  -0.430600
+    H    2.511060  -1.070769   0.147869
+}
+
+set optking { frozen_dihedral = (" 3 1 2 4 ") }
+
+set optking { dynamic_level = 1 
+ geom_maxiter = 250
+ print_trajectory_xyz_file = True }
+
+energy, wfn = optimize('B3LYP-D3', return_wfn=True)
+
+import os
+os.chdir(os.environ['HTMD_PSI4_WORKDIR'])
+
+oeprop(wfn, 'DIPOLE', 'QUADRUPOLE', 'MULLIKEN_CHARGES')
+
+with open('psi4out.xyz', 'w') as f:
+    f.write('4 ' )
+    f.write('%.12f\n' % energy)
+    f.write(MOL.save_string_xyz())
+--------------------------------------------------------------------------
+  Threads set to 1 by Python driver.
+
+  Memory set to   4.981 GiB by Python driver.
+gradient() will perform analytic gradient computation.
+
+*** tstart() called on loro.prib.upf.edu
+*** at Sat Sep 29 16:37:36 2018
+
+   => Loading Basis Set <=
+
+    Name: CC-PVDZ
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry O          line   198 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz.gbs 
+    atoms 3-4 entry H          line    22 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+            by Justin Turney, Rob Parrish, Andy Simmonett
+                             and Daniel Smith
+                              RKS Reference
+                        1 Threads,   5100 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         O            1.014300000000    -0.002300000000     0.060500000000    15.994914619560
+         O            2.462400000000    -0.107500000000    -0.002400000000    15.994914619560
+         H            0.821200000000    -0.823600000000    -0.430600000000     1.007825032070
+         H            2.511060000000    -1.070769000000     0.147869000000     1.007825032070
+
+  Running in c1 symmetry.
+
+  Rotational constants: A =      9.41038  B =      0.13911  C =      0.13755 [cm^-1]
+  Rotational constants: A = 282116.09072  B =   4170.31710  C =   4123.70119 [MHz]
+  Nuclear repulsion =   36.869866811729565
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 18
+  Nalpha       = 9
+  Nbeta        = 9
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 18
+    Number of basis function: 38
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> DFT Potential <==
+
+   => Composite Functional: B3LYP-D3ZERO <= 
+
+    B3LYP-d3zero Hyb-GGA Exchange-Correlation Functional
+
+    P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994)
+
+    Deriv               =              1
+    GGA                 =           TRUE
+    Meta                =          FALSE
+
+    Exchange Hybrid     =           TRUE
+    MP2 Hybrid          =          FALSE
+
+   => Exchange Functionals <=
+
+    0.0800   Slater exchange
+    0.7200         Becke 88
+
+   => Exact (HF) Exchange <=
+
+    0.2000               HF 
+
+   => Correlation Functionals <=
+
+    0.1900   Vosko, Wilk & Nusair (VWN5_RPA)
+    0.8100   Lee, Yang & Parr
+
+   => Molecular Quadrature <=
+
+    Radial Scheme       =       TREUTLER
+    Pruning Scheme      =           FLAT
+    Nuclear Scheme      =       TREUTLER
+
+    BS radius alpha     =              1
+    Pruning alpha       =              1
+    Radial Points       =             75
+    Spherical Points    =            302
+    Total Points        =          88278
+    Total Blocks        =            705
+    Max Points          =            256
+    Max Functions       =             38
+
+   => -D3ZERO: Empirical Dispersion <=
+
+    Grimme's -D3 (zero-damping) Dispersion Correction
+    Grimme S.; Antony J.; Ehrlich S.; Krieg H. (2010), J. Chem. Phys., 132: 154104
+
+        S6 =   1.000000E+00
+        S8 =   1.703000E+00
+       SR6 =   1.261000E+00
+       SR8 =   1.000000E+00
+    ALPHA6 =   1.400000E+01
+
+   => Loading Basis Set <=
+
+    Name: (CC-PVDZ AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry O          line   221 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz-jkfit.gbs 
+    atoms 3-4 entry H          line    51 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz-jkfit.gbs 
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A         38      38       0       0       0       0
+   -------------------------------------------------------
+    Total      38      38       9       9       9       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.003 [GiB]; user supplied 3.486 [GiB]. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory (MB):               3570
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-12
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (CC-PVDZ AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 66
+    Number of basis function: 186
+    Number of Cartesian functions: 212
+    Spherical Harmonics?: true
+    Max angular momentum: 3
+
+  Minimum eigenvalue in the overlap matrix is 2.4849493752E-02.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RKS iter   0:  -151.56629869226694   -1.51566e+02   4.89955e-02 
+   @DF-RKS iter   1:  -151.50876617702951    5.75325e-02   7.31399e-03 
+   @DF-RKS iter   2:  -151.50744206335943    1.32411e-03   7.65644e-03 DIIS
+   @DF-RKS iter   3:  -151.53881143485111   -3.13694e-02   8.70078e-04 DIIS
+   @DF-RKS iter   4:  -151.53918487263311   -3.73438e-04   1.06931e-04 DIIS
+   @DF-RKS iter   5:  -151.53918299482041    1.87781e-06   1.29899e-04 DIIS
+   @DF-RKS iter   6:  -151.53919187730435   -8.88248e-06   8.17486e-06 DIIS
+   @DF-RKS iter   7:  -151.53919192754543   -5.02411e-08   1.41683e-06 DIIS
+   @DF-RKS iter   8:  -151.53919192878536   -1.23993e-09   1.42461e-07 DIIS
+   @DF-RKS iter   9:  -151.53919192880764   -2.22826e-11   2.91691e-08 DIIS
+   @DF-RKS iter  10:  -151.53919192880844   -7.95808e-13   3.64314e-09 DIIS
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1A    -19.191838     2A    -19.191804     3A     -1.120480  
+       4A     -0.887420     5A     -0.553731     6A     -0.431461  
+       7A     -0.427085     8A     -0.343586     9A     -0.256589  
+
+    Virtual:                                                              
+
+      10A      0.018819    11A      0.021034    12A      0.123586  
+      13A      0.562113    14A      0.572677    15A      0.861932  
+      16A      0.867754    17A      0.910657    18A      0.923692  
+      19A      1.012103    20A      1.034274    21A      1.197429  
+      22A      1.277002    23A      1.302339    24A      1.530434  
+      25A      1.588723    26A      1.762390    27A      2.032096  
+      28A      2.083669    29A      2.359688    30A      2.384871  
+      31A      2.624759    32A      2.889257    33A      2.898771  
+      34A      3.014425    35A      3.143535    36A      3.463883  
+      37A      3.567398    38A      3.819862  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     9 ]
+
+  Energy converged.
+
+  @DF-RKS Final Energy:  -151.53919192880844
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =             36.8698668117295654
+    One-Electron Energy =                -281.6259356281693158
+    Two-Electron Energy =                 107.6793433549385810
+    DFT Exchange-Correlation Energy =     -14.4622774073072478
+    Empirical Dispersion Energy =          -0.0001890600000000
+    VV10 Nonlocal Energy =                  0.0000000000000000
+    Total Energy =                       -151.5391919288084068
+
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:    58.8571      Y:    -5.2398      Z:     0.3441
+
+  Electronic Dipole Moment: [e a0]
+     X:   -58.9499      Y:     4.0939      Z:    -0.5629
+
+  Dipole Moment: [e a0]
+     X:    -0.0927      Y:    -1.1459      Z:    -0.2188     Total:     1.1703
+
+  Dipole Moment: [D]
+     X:    -0.2357      Y:    -2.9125      Z:    -0.5562     Total:     2.9745
+
+
+*** tstop() called on loro.prib.upf.edu at Sat Sep 29 16:37:40 2018
+Module time:
+	user time   =       3.17 seconds =       0.05 minutes
+	system time =       0.08 seconds =       0.00 minutes
+	total time  =          4 seconds =       0.07 minutes
+Total time:
+	user time   =       3.17 seconds =       0.05 minutes
+	system time =       0.08 seconds =       0.00 minutes
+	total time  =          4 seconds =       0.07 minutes
+
+*** tstart() called on loro.prib.upf.edu
+*** at Sat Sep 29 16:37:40 2018
+
+
+         ------------------------------------------------------------
+                                   SCF GRAD                          
+                          Rob Parrish, Justin Turney,                
+                       Andy Simmonett, and Alex Sokolov              
+         ------------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         O            1.014300000000    -0.002300000000     0.060500000000    15.994914619560
+         O            2.462400000000    -0.107500000000    -0.002400000000    15.994914619560
+         H            0.821200000000    -0.823600000000    -0.430600000000     1.007825032070
+         H            2.511060000000    -1.070769000000     0.147869000000     1.007825032070
+
+  Nuclear repulsion =   36.869866811729565
+
+  ==> Basis Set <==
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 18
+    Number of basis function: 38
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> DFJKGrad: Density-Fitted SCF Gradients <==
+
+    Gradient:                    1
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory (MB):              3570
+    Schwarz Cutoff:          0E+00
+    Fitting Condition:       1E-12
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (CC-PVDZ AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 66
+    Number of basis function: 186
+    Number of Cartesian functions: 212
+    Spherical Harmonics?: true
+    Max angular momentum: 3
+
+  ==> DFT Potential <==
+
+   => Composite Functional: B3LYP-D3ZERO <= 
+
+    B3LYP-d3zero Hyb-GGA Exchange-Correlation Functional
+
+    P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994)
+
+    Deriv               =              1
+    GGA                 =           TRUE
+    Meta                =          FALSE
+
+    Exchange Hybrid     =           TRUE
+    MP2 Hybrid          =          FALSE
+
+   => Exchange Functionals <=
+
+    0.0800   Slater exchange
+    0.7200         Becke 88
+
+   => Exact (HF) Exchange <=
+
+    0.2000               HF 
+
+   => Correlation Functionals <=
+
+    0.1900   Vosko, Wilk & Nusair (VWN5_RPA)
+    0.8100   Lee, Yang & Parr
+
+   => Molecular Quadrature <=
+
+    Radial Scheme       =       TREUTLER
+    Pruning Scheme      =           FLAT
+    Nuclear Scheme      =       TREUTLER
+
+    BS radius alpha     =              1
+    Pruning alpha       =              1
+    Radial Points       =             75
+    Spherical Points    =            302
+    Total Points        =          88278
+    Total Blocks        =            705
+    Max Points          =            256
+    Max Functions       =             38
+
+
+  -Total Gradient:
+     Atom            X                  Y                   Z
+    ------   -----------------  -----------------  -----------------
+       1        0.004059270908     0.006874867199     0.002396274309
+       2       -0.002868738828     0.007736744419     0.000420736260
+       3        0.014562793609    -0.009372494707     0.002799087204
+       4       -0.015753367677    -0.005239559058    -0.005616177747
+
+
+*** tstop() called on loro.prib.upf.edu at Sat Sep 29 16:37:40 2018
+Module time:
+	user time   =       0.64 seconds =       0.01 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       3.81 seconds =       0.06 minutes
+	system time =       0.10 seconds =       0.00 minutes
+	total time  =          4 seconds =       0.07 minutes
+
+			-----------------------------------------
+			 OPTKING 2.0: for geometry optimizations 
+			  - R.A. King,  Bethel University        
+			-----------------------------------------
+	At level 1: Red. Int., RFO, no backsteps, dynamic trust
+
+	Internal coordinates to be generated automatically.
+	Detected frag 1 with atoms:  1 2 3 4
+	---Fragment 1 Bond Connectivity---
+	 1 : 2 3
+	 2 : 1 4
+	 3 : 1
+	 4 : 2
+
+	Assuming in current code that numbering for constraints corresponds to unified fragment.
+	Frozen dihedral atom list: 
+	     3     1     2     4
+	---Fragment 1 Geometry and Gradient---
+	 O           1.9167492166       -0.0043463701        0.1143284310
+	 O           4.6532616296       -0.2031455593       -0.0045353427
+	 H           1.5518431003       -1.5563784430       -0.8137160728
+	 H           4.7452157032       -2.0234601616        0.2794319135
+	             0.0040592709        0.0068748672        0.0023962743
+	            -0.0028687388        0.0077367444        0.0004207363
+	             0.0145627936       -0.0093724947        0.0027990872
+	            -0.0157533677       -0.0052395591       -0.0056161777
+
+	Previous optimization step data not found.  Starting new optimization.
+
+	---Fragment 1 Intrafragment Coordinates---
+	 - Coordinate -           - BOHR/RAD -       - ANG/DEG -
+	 R(1,2)           =         2.746297	       1.453278
+	 R(1,3)           =         1.844784	       0.976217
+	 R(2,4)           =         1.844624	       0.976133
+	 B(1,2,4)         =         1.685491	      96.571520
+	 B(2,1,3)         =         1.685473	      96.570488
+	*D(3,1,2,4)       =        -0.698132	     -40.000022
+
+	Current energy   :      -151.5391919288
+
+	Generating empirical Hessian (Schlegel '84) for each fragment.
+	Taking RFO optimization step.
+	Going to follow RFO solution 1.
+	Using RFO vector 1.
+	Norm of target step-size    0.24312
+	Projected energy change by RFO approximation:        -0.0073539703
+
+	Back-transformation to cartesian coordinates...
+	Successfully converged to displaced geometry.
+
+	Back-transformation to cartesian coordinates to adjust frozen coordinates...
+	Successfully converged to displaced geometry.
+
+	--- Internal Coordinate Step in ANG or DEG, aJ/ANG or AJ/DEG ---
+	 ---------------------------------------------------------------------------
+	   Coordinate                Previous        Force       Change         New 
+	   ----------                --------       ------       ------       ------
+	    1 R(1,2)          =      1.453278     0.152501     0.025194     1.478472
+	    2 R(1,3)          =      0.976217    -0.029621    -0.003577     0.972640
+	    3 R(2,4)          =      0.976133    -0.028997    -0.003501     0.972632
+	    4 B(1,2,4)        =     96.571520     0.002187     9.616792   106.188312
+	    5 B(2,1,3)        =     96.570488     0.002187     9.618854   106.189341
+	    6 *D(3,1,2,4)     =    -40.000022     0.000000    -0.000000   -40.000022
+	 ---------------------------------------------------------------------------
+	Successfully symmetrized geometry.
+
+  ==> Convergence Check <==
+
+  Measures of convergence in internal coordinates in au.
+  Criteria marked as inactive (o), active & met (*), and active & unmet ( ).
+  --------------------------------------------------------------------------------------------- ~
+   Step     Total Energy     Delta E     MAX Force     RMS Force      MAX Disp      RMS Disp    ~
+  --------------------------------------------------------------------------------------------- ~
+    Convergence Criteria    1.00e-06 *    3.00e-04 *             o    1.20e-03 *             o  ~
+  --------------------------------------------------------------------------------------------- ~
+      1    -151.53919193   -1.52e+02      2.87e-02      1.83e-02 o    1.68e-01      9.89e-02 o  ~
+  ---------------------------------------------------------------------------------------------
+
+	Writing optimization data to binary file.
+	Structure for next step:
+	Cartesian Geometry (in Angstrom)
+	    O     1.0001998002  -0.0115630265   0.0251952504
+	    O     2.4738324658  -0.1310753045   0.0266203404
+	    H     0.6654907230  -0.7895712362  -0.4530330138
+	    H     2.6694370110  -1.0719594328   0.1765864230
+			--------------------------
+			 OPTKING Finished Execution 
+			--------------------------
+
+    Structure for next step:
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+    O            1.000199800216    -0.011563026472     0.025195250380
+    O            2.473832465799    -0.131075304541     0.026620340381
+    H            0.665490723025    -0.789571236158    -0.453033013768
+    H            2.669437010960    -1.071959432828     0.176586423006
+
+gradient() will perform analytic gradient computation.
+
+*** tstart() called on loro.prib.upf.edu
+*** at Sat Sep 29 16:37:40 2018
+
+   => Loading Basis Set <=
+
+    Name: CC-PVDZ
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry O          line   198 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz.gbs 
+    atoms 3-4 entry H          line    22 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+            by Justin Turney, Rob Parrish, Andy Simmonett
+                             and Daniel Smith
+                              RKS Reference
+                        1 Threads,   5100 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         O            1.000199800216    -0.011563026472     0.025195250380    15.994914619560
+         O            2.473832465799    -0.131075304541     0.026620340381    15.994914619560
+         H            0.665490723025    -0.789571236158    -0.453033013768     1.007825032070
+         H            2.669437010960    -1.071959432828     0.176586423006     1.007825032070
+
+  Running in c1 symmetry.
+
+  Rotational constants: A =     10.16088  B =      0.13775  C =      0.13634 [cm^-1]
+  Rotational constants: A = 304615.60760  B =   4129.73046  C =   4087.41147 [MHz]
+  Nuclear repulsion =   36.130628112266237
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 18
+  Nalpha       = 9
+  Nbeta        = 9
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is READ.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 18
+    Number of basis function: 38
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> DFT Potential <==
+
+   => Composite Functional: B3LYP-D3ZERO <= 
+
+    B3LYP-d3zero Hyb-GGA Exchange-Correlation Functional
+
+    P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994)
+
+    Deriv               =              1
+    GGA                 =           TRUE
+    Meta                =          FALSE
+
+    Exchange Hybrid     =           TRUE
+    MP2 Hybrid          =          FALSE
+
+   => Exchange Functionals <=
+
+    0.0800   Slater exchange
+    0.7200         Becke 88
+
+   => Exact (HF) Exchange <=
+
+    0.2000               HF 
+
+   => Correlation Functionals <=
+
+    0.1900   Vosko, Wilk & Nusair (VWN5_RPA)
+    0.8100   Lee, Yang & Parr
+
+   => Molecular Quadrature <=
+
+    Radial Scheme       =       TREUTLER
+    Pruning Scheme      =           FLAT
+    Nuclear Scheme      =       TREUTLER
+
+    BS radius alpha     =              1
+    Pruning alpha       =              1
+    Radial Points       =             75
+    Spherical Points    =            302
+    Total Points        =          88308
+    Total Blocks        =            708
+    Max Points          =            256
+    Max Functions       =             38
+
+   => -D3ZERO: Empirical Dispersion <=
+
+    Grimme's -D3 (zero-damping) Dispersion Correction
+    Grimme S.; Antony J.; Ehrlich S.; Krieg H. (2010), J. Chem. Phys., 132: 154104
+
+        S6 =   1.000000E+00
+        S8 =   1.703000E+00
+       SR6 =   1.261000E+00
+       SR8 =   1.000000E+00
+    ALPHA6 =   1.400000E+01
+
+   => Loading Basis Set <=
+
+    Name: (CC-PVDZ AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry O          line   221 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz-jkfit.gbs 
+    atoms 3-4 entry H          line    51 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz-jkfit.gbs 
+
+  Reading orbitals from file 180, no projection.
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A         38      38       0       0       0       0
+   -------------------------------------------------------
+    Total      38      38       9       9       9       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.003 [GiB]; user supplied 3.486 [GiB]. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory (MB):               3570
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-12
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (CC-PVDZ AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 66
+    Number of basis function: 186
+    Number of Cartesian functions: 212
+    Spherical Harmonics?: true
+    Max angular momentum: 3
+
+  Minimum eigenvalue in the overlap matrix is 2.6849838581E-02.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Orbitals guess was supplied from a previous computation.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RKS iter   0:  -151.53613463718983   -1.51536e+02   3.16329e-03 
+   @DF-RKS iter   1:  -151.54124875086342   -5.11411e-03   8.77229e-04 
+   @DF-RKS iter   2:  -151.54153601383987   -2.87263e-04   5.04461e-04 DIIS
+   @DF-RKS iter   3:  -151.54166179253849   -1.25779e-04   1.48964e-04 DIIS
+   @DF-RKS iter   4:  -151.54167384778469   -1.20552e-05   2.15356e-05 DIIS
+   @DF-RKS iter   5:  -151.54167422158650   -3.73802e-07   2.06674e-06 DIIS
+   @DF-RKS iter   6:  -151.54167422058833    9.98170e-10   3.08479e-06 DIIS
+   @DF-RKS iter   7:  -151.54167422564461   -5.05628e-09   1.89178e-07 DIIS
+   @DF-RKS iter   8:  -151.54167422566755   -2.29363e-11   2.12795e-08 DIIS
+   @DF-RKS iter   9:  -151.54167422566806   -5.11591e-13   3.16347e-09 DIIS
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1A    -19.191041     2A    -19.191011     3A     -1.097953  
+       4A     -0.898657     5A     -0.555695     6A     -0.419212  
+       7A     -0.412729     8A     -0.341732     9A     -0.258137  
+
+    Virtual:                                                              
+
+      10A     -0.000751    11A      0.031211    12A      0.119398  
+      13A      0.555053    14A      0.581790    15A      0.860692  
+      16A      0.865188    17A      0.948400    18A      0.949481  
+      19A      0.996760    20A      1.041297    21A      1.277607  
+      22A      1.280229    23A      1.339674    24A      1.444864  
+      25A      1.570445    26A      1.781735    27A      2.040191  
+      28A      2.088954    29A      2.366345    30A      2.375126  
+      31A      2.611533    32A      2.892016    33A      2.899567  
+      34A      2.987772    35A      3.130060    36A      3.519770  
+      37A      3.564350    38A      3.757162  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     9 ]
+
+  Energy converged.
+
+  @DF-RKS Final Energy:  -151.54167422566806
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =             36.1306281122662369
+    One-Electron Energy =                -280.2360040089422455
+    Two-Electron Energy =                 107.0135722756214562
+    DFT Exchange-Correlation Energy =     -14.4494946146135206
+    Empirical Dispersion Energy =          -0.0003759900000000
+    VV10 Nonlocal Energy =                  0.0000000000000000
+    Total Energy =                       -151.5416742256680891
+
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:    58.8219      Y:    -5.6742      Z:     0.2609
+
+  Electronic Dipole Moment: [e a0]
+     X:   -58.9150      Y:     4.5237      Z:    -0.4806
+
+  Dipole Moment: [e a0]
+     X:    -0.0931      Y:    -1.1504      Z:    -0.2197     Total:     1.1749
+
+  Dipole Moment: [D]
+     X:    -0.2366      Y:    -2.9241      Z:    -0.5584     Total:     2.9863
+
+
+*** tstop() called on loro.prib.upf.edu at Sat Sep 29 16:37:43 2018
+Module time:
+	user time   =       2.46 seconds =       0.04 minutes
+	system time =       0.06 seconds =       0.00 minutes
+	total time  =          3 seconds =       0.05 minutes
+Total time:
+	user time   =       6.28 seconds =       0.10 minutes
+	system time =       0.17 seconds =       0.00 minutes
+	total time  =          7 seconds =       0.12 minutes
+
+*** tstart() called on loro.prib.upf.edu
+*** at Sat Sep 29 16:37:43 2018
+
+
+         ------------------------------------------------------------
+                                   SCF GRAD                          
+                          Rob Parrish, Justin Turney,                
+                       Andy Simmonett, and Alex Sokolov              
+         ------------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         O            1.000199800216    -0.011563026472     0.025195250380    15.994914619560
+         O            2.473832465799    -0.131075304541     0.026620340381    15.994914619560
+         H            0.665490723025    -0.789571236158    -0.453033013768     1.007825032070
+         H            2.669437010960    -1.071959432828     0.176586423006     1.007825032070
+
+  Nuclear repulsion =   36.130628112266237
+
+  ==> Basis Set <==
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 18
+    Number of basis function: 38
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> DFJKGrad: Density-Fitted SCF Gradients <==
+
+    Gradient:                    1
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory (MB):              3570
+    Schwarz Cutoff:          0E+00
+    Fitting Condition:       1E-12
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (CC-PVDZ AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 66
+    Number of basis function: 186
+    Number of Cartesian functions: 212
+    Spherical Harmonics?: true
+    Max angular momentum: 3
+
+  ==> DFT Potential <==
+
+   => Composite Functional: B3LYP-D3ZERO <= 
+
+    B3LYP-d3zero Hyb-GGA Exchange-Correlation Functional
+
+    P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994)
+
+    Deriv               =              1
+    GGA                 =           TRUE
+    Meta                =          FALSE
+
+    Exchange Hybrid     =           TRUE
+    MP2 Hybrid          =          FALSE
+
+   => Exchange Functionals <=
+
+    0.0800   Slater exchange
+    0.7200         Becke 88
+
+   => Exact (HF) Exchange <=
+
+    0.2000               HF 
+
+   => Correlation Functionals <=
+
+    0.1900   Vosko, Wilk & Nusair (VWN5_RPA)
+    0.8100   Lee, Yang & Parr
+
+   => Molecular Quadrature <=
+
+    Radial Scheme       =       TREUTLER
+    Pruning Scheme      =           FLAT
+    Nuclear Scheme      =       TREUTLER
+
+    BS radius alpha     =              1
+    Pruning alpha       =              1
+    Radial Points       =             75
+    Spherical Points    =            302
+    Total Points        =          88308
+    Total Blocks        =            708
+    Max Points          =            256
+    Max Functions       =             38
+
+
+  -Total Gradient:
+     Atom            X                  Y                   Z
+    ------   -----------------  -----------------  -----------------
+       1       -0.012404074032     0.000198113143    -0.010906922379
+       2        0.011959376324    -0.005740886583     0.009850649316
+       3       -0.005104451345     0.002068743029     0.006478106727
+       4        0.005550020898     0.003484775066    -0.005419784000
+
+
+*** tstop() called on loro.prib.upf.edu at Sat Sep 29 16:37:44 2018
+Module time:
+	user time   =       0.57 seconds =       0.01 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       6.86 seconds =       0.11 minutes
+	system time =       0.19 seconds =       0.00 minutes
+	total time  =          8 seconds =       0.13 minutes
+
+			-----------------------------------------
+			 OPTKING 2.0: for geometry optimizations 
+			  - R.A. King,  Bethel University        
+			-----------------------------------------
+	At level 1: Red. Int., RFO, no backsteps, dynamic trust
+
+	Previous internal coordinate definitions found.
+	---Fragment 1 Geometry and Gradient---
+	 O           1.8901037006       -0.0218509533        0.0476121231
+	 O           4.6748658590       -0.2476964284        0.0503051529
+	 H           1.2575952105       -1.4920733987       -0.8561083252
+	 H           5.0445048797       -2.0257097536        0.3336999783
+	            -0.0124040740        0.0001981131       -0.0109069224
+	             0.0119593763       -0.0057408866        0.0098506493
+	            -0.0051044513        0.0020687430        0.0064781067
+	             0.0055500209        0.0034847751       -0.0054197840
+
+	---Fragment 1 Intrafragment Coordinates---
+	 - Coordinate -           - BOHR/RAD -       - ANG/DEG -
+	 R(1,2)           =         2.793907	       1.478472
+	 R(1,3)           =         1.838024	       0.972640
+	 R(2,4)           =         1.838009	       0.972632
+	 B(1,2,4)         =         1.853336	     106.188312
+	 B(2,1,3)         =         1.853354	     106.189341
+	*D(3,1,2,4)       =        -0.698132	     -40.000022
+
+	Current energy   :      -151.5416742257
+
+	Energy change for the previous step:
+		Projected    :        -0.0073539703
+		Actual       :        -0.0024822969
+
+	Performing BFGS update.
+	Previous computed or guess Hessian on step 1.
+	Steps to be used in Hessian update: 1
+	Taking RFO optimization step.
+	Going to follow RFO solution 1.
+	Using RFO vector 1.
+	Norm of target step-size    0.07047
+	Projected energy change by RFO approximation:        -0.0007190575
+
+	Back-transformation to cartesian coordinates...
+	Successfully converged to displaced geometry.
+
+	Back-transformation to cartesian coordinates to adjust frozen coordinates...
+	Successfully converged to displaced geometry.
+
+	--- Internal Coordinate Step in ANG or DEG, aJ/ANG or AJ/DEG ---
+	 ---------------------------------------------------------------------------
+	   Coordinate                Previous        Force       Change         New 
+	   ----------                --------       ------       ------       ------
+	    1 R(1,2)          =      1.478472    -0.145322    -0.016466     1.462005
+	    2 R(1,3)          =      0.972640     0.025383     0.002090     0.974731
+	    3 R(2,4)          =      0.972632     0.025442     0.002096     0.974728
+	    4 B(1,2,4)        =    106.188312    -0.000889    -2.553615   103.634698
+	    5 B(2,1,3)        =    106.189341    -0.000890    -2.554462   103.634879
+	    6 *D(3,1,2,4)     =    -40.000022     0.000000     0.000000   -40.000022
+	 ---------------------------------------------------------------------------
+	Successfully symmetrized geometry.
+
+  ==> Convergence Check <==
+
+  Measures of convergence in internal coordinates in au.
+  Criteria marked as inactive (o), active & met (*), and active & unmet ( ).
+  ---------------------------------------------------------------------------------------------
+   Step     Total Energy     Delta E     MAX Force     RMS Force      MAX Disp      RMS Disp   
+  ---------------------------------------------------------------------------------------------
+    Convergence Criteria    1.00e-06 *    3.00e-04 *             o    1.20e-03 *             o
+  ---------------------------------------------------------------------------------------------
+      2    -151.54167423   -2.48e-03      1.76e-02      1.00e-02 o    4.46e-02      2.88e-02 o  ~
+  ---------------------------------------------------------------------------------------------
+
+	Writing optimization data to binary file.
+	Structure for next step:
+	Cartesian Geometry (in Angstrom)
+	    O     1.0088038818  -0.0078850146   0.0354397646
+	    O     2.4662043059  -0.1226160124   0.0186922705
+	    H     0.7103444453  -0.8007524184  -0.4466217195
+	    H     2.6236073670  -1.0729155546   0.1678586844
+			--------------------------
+			 OPTKING Finished Execution 
+			--------------------------
+
+    Structure for next step:
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+    O            1.008803881780    -0.007885014626     0.035439764627
+    O            2.466204305910    -0.122616012436     0.018692270479
+    H            0.710344445270    -0.800752418365    -0.446621719480
+    H            2.623607367041    -1.072915554574     0.167858684374
+
+gradient() will perform analytic gradient computation.
+
+*** tstart() called on loro.prib.upf.edu
+*** at Sat Sep 29 16:37:44 2018
+
+   => Loading Basis Set <=
+
+    Name: CC-PVDZ
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry O          line   198 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz.gbs 
+    atoms 3-4 entry H          line    22 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+            by Justin Turney, Rob Parrish, Andy Simmonett
+                             and Daniel Smith
+                              RKS Reference
+                        1 Threads,   5100 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         O            1.008803881780    -0.007885014626     0.035439764627    15.994914619560
+         O            2.466204305910    -0.122616012436     0.018692270479    15.994914619560
+         H            0.710344445270    -0.800752418365    -0.446621719480     1.007825032070
+         H            2.623607367041    -1.072915554574     0.167858684374     1.007825032070
+
+  Running in c1 symmetry.
+
+  Rotational constants: A =      9.91788  B =      0.13840  C =      0.13692 [cm^-1]
+  Rotational constants: A = 297330.64603  B =   4149.10403  C =   4104.89412 [MHz]
+  Nuclear repulsion =   36.479059119539059
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 18
+  Nalpha       = 9
+  Nbeta        = 9
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is READ.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 18
+    Number of basis function: 38
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> DFT Potential <==
+
+   => Composite Functional: B3LYP-D3ZERO <= 
+
+    B3LYP-d3zero Hyb-GGA Exchange-Correlation Functional
+
+    P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994)
+
+    Deriv               =              1
+    GGA                 =           TRUE
+    Meta                =          FALSE
+
+    Exchange Hybrid     =           TRUE
+    MP2 Hybrid          =          FALSE
+
+   => Exchange Functionals <=
+
+    0.0800   Slater exchange
+    0.7200         Becke 88
+
+   => Exact (HF) Exchange <=
+
+    0.2000               HF 
+
+   => Correlation Functionals <=
+
+    0.1900   Vosko, Wilk & Nusair (VWN5_RPA)
+    0.8100   Lee, Yang & Parr
+
+   => Molecular Quadrature <=
+
+    Radial Scheme       =       TREUTLER
+    Pruning Scheme      =           FLAT
+    Nuclear Scheme      =       TREUTLER
+
+    BS radius alpha     =              1
+    Pruning alpha       =              1
+    Radial Points       =             75
+    Spherical Points    =            302
+    Total Points        =          88306
+    Total Blocks        =            712
+    Max Points          =            256
+    Max Functions       =             38
+
+   => -D3ZERO: Empirical Dispersion <=
+
+    Grimme's -D3 (zero-damping) Dispersion Correction
+    Grimme S.; Antony J.; Ehrlich S.; Krieg H. (2010), J. Chem. Phys., 132: 154104
+
+        S6 =   1.000000E+00
+        S8 =   1.703000E+00
+       SR6 =   1.261000E+00
+       SR8 =   1.000000E+00
+    ALPHA6 =   1.400000E+01
+
+   => Loading Basis Set <=
+
+    Name: (CC-PVDZ AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry O          line   221 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz-jkfit.gbs 
+    atoms 3-4 entry H          line    51 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz-jkfit.gbs 
+
+  Reading orbitals from file 180, no projection.
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A         38      38       0       0       0       0
+   -------------------------------------------------------
+    Total      38      38       9       9       9       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.003 [GiB]; user supplied 3.486 [GiB]. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory (MB):               3570
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-12
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (CC-PVDZ AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 66
+    Number of basis function: 186
+    Number of Cartesian functions: 212
+    Spherical Harmonics?: true
+    Max angular momentum: 3
+
+  Minimum eigenvalue in the overlap matrix is 2.5747105744E-02.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Orbitals guess was supplied from a previous computation.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RKS iter   0:  -151.54609514413909   -1.51546e+02   1.13242e-03 
+   @DF-RKS iter   1:  -151.54254734141938    3.54780e-03   3.56588e-04 
+   @DF-RKS iter   2:  -151.54259411556907   -4.67741e-05   1.75162e-04 DIIS
+   @DF-RKS iter   3:  -151.54260923629872   -1.51207e-05   3.26051e-05 DIIS
+   @DF-RKS iter   4:  -151.54260980138849   -5.65090e-07   6.52570e-06 DIIS
+   @DF-RKS iter   5:  -151.54260983436171   -3.29732e-08   3.59288e-07 DIIS
+   @DF-RKS iter   6:  -151.54260983442401   -6.23004e-11   4.16450e-07 DIIS
+   @DF-RKS iter   7:  -151.54260983451391   -8.98979e-11   6.89026e-08 DIIS
+   @DF-RKS iter   8:  -151.54260983451633   -2.41585e-12   4.63226e-09 DIIS
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1A    -19.190697     2A    -19.190666     3A     -1.107000  
+       4A     -0.893708     5A     -0.556676     6A     -0.423144  
+       7A     -0.417722     8A     -0.341899     9A     -0.256278  
+
+    Virtual:                                                              
+
+      10A      0.010615    11A      0.027449    12A      0.121881  
+      13A      0.558756    14A      0.578251    15A      0.863330  
+      16A      0.865004    17A      0.938738    18A      0.938987  
+      19A      0.999326    20A      1.037512    21A      1.262414  
+      22A      1.288735    23A      1.320104    24A      1.463096  
+      25A      1.581429    26A      1.773870    27A      2.037498  
+      28A      2.086552    29A      2.354076    30A      2.382087  
+      31A      2.606947    32A      2.892086    33A      2.899324  
+      34A      3.005003    35A      3.148235    36A      3.503074  
+      37A      3.562123    38A      3.786225  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     9 ]
+
+  Energy converged.
+
+  @DF-RKS Final Energy:  -151.54260983451633
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =             36.4790591195390590
+    One-Electron Energy =                -280.9078064718547694
+    Two-Electron Energy =                 107.3418373208353103
+    DFT Exchange-Correlation Energy =     -14.4553924930359017
+    Empirical Dispersion Energy =          -0.0003073100000000
+    VV10 Nonlocal Energy =                  0.0000000000000000
+    Total Energy =                       -151.5426098345163268
+
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:    58.8348      Y:    -5.5136      Z:     0.2916
+
+  Electronic Dipole Moment: [e a0]
+     X:   -58.9281      Y:     4.3604      Z:    -0.5118
+
+  Dipole Moment: [e a0]
+     X:    -0.0933      Y:    -1.1532      Z:    -0.2202     Total:     1.1777
+
+  Dipole Moment: [D]
+     X:    -0.2372      Y:    -2.9311      Z:    -0.5598     Total:     2.9935
+
+
+*** tstop() called on loro.prib.upf.edu at Sat Sep 29 16:37:47 2018
+Module time:
+	user time   =       2.39 seconds =       0.04 minutes
+	system time =       0.05 seconds =       0.00 minutes
+	total time  =          3 seconds =       0.05 minutes
+Total time:
+	user time   =       9.26 seconds =       0.15 minutes
+	system time =       0.25 seconds =       0.00 minutes
+	total time  =         11 seconds =       0.18 minutes
+
+*** tstart() called on loro.prib.upf.edu
+*** at Sat Sep 29 16:37:47 2018
+
+
+         ------------------------------------------------------------
+                                   SCF GRAD                          
+                          Rob Parrish, Justin Turney,                
+                       Andy Simmonett, and Alex Sokolov              
+         ------------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         O            1.008803881780    -0.007885014626     0.035439764627    15.994914619560
+         O            2.466204305910    -0.122616012436     0.018692270479    15.994914619560
+         H            0.710344445270    -0.800752418365    -0.446621719480     1.007825032070
+         H            2.623607367041    -1.072915554574     0.167858684374     1.007825032070
+
+  Nuclear repulsion =   36.479059119539059
+
+  ==> Basis Set <==
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 18
+    Number of basis function: 38
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> DFJKGrad: Density-Fitted SCF Gradients <==
+
+    Gradient:                    1
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory (MB):              3570
+    Schwarz Cutoff:          0E+00
+    Fitting Condition:       1E-12
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (CC-PVDZ AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 66
+    Number of basis function: 186
+    Number of Cartesian functions: 212
+    Spherical Harmonics?: true
+    Max angular momentum: 3
+
+  ==> DFT Potential <==
+
+   => Composite Functional: B3LYP-D3ZERO <= 
+
+    B3LYP-d3zero Hyb-GGA Exchange-Correlation Functional
+
+    P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994)
+
+    Deriv               =              1
+    GGA                 =           TRUE
+    Meta                =          FALSE
+
+    Exchange Hybrid     =           TRUE
+    MP2 Hybrid          =          FALSE
+
+   => Exchange Functionals <=
+
+    0.0800   Slater exchange
+    0.7200         Becke 88
+
+   => Exact (HF) Exchange <=
+
+    0.2000               HF 
+
+   => Correlation Functionals <=
+
+    0.1900   Vosko, Wilk & Nusair (VWN5_RPA)
+    0.8100   Lee, Yang & Parr
+
+   => Molecular Quadrature <=
+
+    Radial Scheme       =       TREUTLER
+    Pruning Scheme      =           FLAT
+    Nuclear Scheme      =       TREUTLER
+
+    BS radius alpha     =              1
+    Pruning alpha       =              1
+    Radial Points       =             75
+    Spherical Points    =            302
+    Total Points        =          88306
+    Total Blocks        =            712
+    Max Points          =            256
+    Max Functions       =             38
+
+
+  -Total Gradient:
+     Atom            X                  Y                   Z
+    ------   -----------------  -----------------  -----------------
+       1       -0.003994361430     0.003240210686    -0.006520372674
+       2        0.004254478635    -0.000036040843     0.007132954861
+       3       -0.000621853506    -0.002536630072     0.004773429104
+       4        0.000361217640    -0.000673948620    -0.005387235197
+
+
+*** tstop() called on loro.prib.upf.edu at Sat Sep 29 16:37:48 2018
+Module time:
+	user time   =       0.65 seconds =       0.01 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =       9.92 seconds =       0.17 minutes
+	system time =       0.27 seconds =       0.00 minutes
+	total time  =         12 seconds =       0.20 minutes
+
+			-----------------------------------------
+			 OPTKING 2.0: for geometry optimizations 
+			  - R.A. King,  Bethel University        
+			-----------------------------------------
+	At level 1: Red. Int., RFO, no backsteps, dynamic trust
+
+	Previous internal coordinate definitions found.
+	---Fragment 1 Geometry and Gradient---
+	 O           1.9063630584       -0.0149005182        0.0669714494
+	 O           4.6604507259       -0.2317106830        0.0353232720
+	 H           1.3423564616       -1.5132027710       -0.8439927348
+	 H           4.9578994039       -2.0275165619        0.3172069425
+	            -0.0039943614        0.0032402107       -0.0065203727
+	             0.0042544786       -0.0000360408        0.0071329549
+	            -0.0006218535       -0.0025366301        0.0047734291
+	             0.0003612176       -0.0006739486       -0.0053872352
+
+	---Fragment 1 Intrafragment Coordinates---
+	 - Coordinate -           - BOHR/RAD -       - ANG/DEG -
+	 R(1,2)           =         2.762790	       1.462005
+	 R(1,3)           =         1.841974	       0.974731
+	 R(2,4)           =         1.841970	       0.974728
+	 B(1,2,4)         =         1.808767	     103.634698
+	 B(2,1,3)         =         1.808770	     103.634879
+	*D(3,1,2,4)       =        -0.698132	     -40.000022
+
+	Current energy   :      -151.5426098345
+
+	Energy change for the previous step:
+		Projected    :        -0.0007190575
+		Actual       :        -0.0009356088
+	Energy ratio indicates good step: Trust radius increased to 1.000e+00.
+
+
+	Performing BFGS update.
+	Previous computed or guess Hessian on step 1.
+	Steps to be used in Hessian update: 2 1
+	Taking RFO optimization step.
+	Going to follow RFO solution 1.
+	Using RFO vector 1.
+	Norm of target step-size    0.01100
+	Projected energy change by RFO approximation:        -0.0000474002
+
+	Back-transformation to cartesian coordinates...
+	Successfully converged to displaced geometry.
+
+	Back-transformation to cartesian coordinates to adjust frozen coordinates...
+	Successfully converged to displaced geometry.
+
+	--- Internal Coordinate Step in ANG or DEG, aJ/ANG or AJ/DEG ---
+	 ---------------------------------------------------------------------------
+	   Coordinate                Previous        Force       Change         New 
+	   ----------                --------       ------       ------       ------
+	    1 R(1,2)          =      1.462005    -0.038199    -0.005775     1.456230
+	    2 R(1,3)          =      0.974731     0.000891    -0.000007     0.974724
+	    3 R(2,4)          =      0.974728     0.000908    -0.000003     0.974725
+	    4 B(1,2,4)        =    103.634698    -0.000072    -0.056261   103.578437
+	    5 B(2,1,3)        =    103.634879    -0.000072    -0.056438   103.578441
+	    6 *D(3,1,2,4)     =    -40.000022     0.000000     0.000000   -40.000022
+	 ---------------------------------------------------------------------------
+	Successfully symmetrized geometry.
+
+  ==> Convergence Check <==
+
+  Measures of convergence in internal coordinates in au.
+  Criteria marked as inactive (o), active & met (*), and active & unmet ( ).
+  ---------------------------------------------------------------------------------------------
+   Step     Total Energy     Delta E     MAX Force     RMS Force      MAX Disp      RMS Disp   
+  ---------------------------------------------------------------------------------------------
+    Convergence Criteria    1.00e-06 *    3.00e-04 *             o    1.20e-03 *             o
+  ---------------------------------------------------------------------------------------------
+      3    -151.54260983   -9.36e-04      4.64e-03      1.97e-03 o    1.09e-02      4.49e-03 o  ~
+  ---------------------------------------------------------------------------------------------
+
+	Writing optimization data to binary file.
+	Structure for next step:
+	Cartesian Geometry (in Angstrom)
+	    O     1.0116875221  -0.0081248948   0.0360276645
+	    O     2.4633350132  -0.1221727928   0.0181423929
+	    H     0.7138715767  -0.8012682059  -0.4459639906
+	    H     2.6200658880  -1.0726031065   0.1671629332
+			--------------------------
+			 OPTKING Finished Execution 
+			--------------------------
+
+    Structure for next step:
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+    O            1.011687522102    -0.008124894835     0.036027664486
+    O            2.463335013180    -0.122172792801     0.018142392892
+    H            0.713871576727    -0.801268205892    -0.445963990569
+    H            2.620065887990    -1.072603106472     0.167162933192
+
+gradient() will perform analytic gradient computation.
+
+*** tstart() called on loro.prib.upf.edu
+*** at Sat Sep 29 16:37:48 2018
+
+   => Loading Basis Set <=
+
+    Name: CC-PVDZ
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry O          line   198 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz.gbs 
+    atoms 3-4 entry H          line    22 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+            by Justin Turney, Rob Parrish, Andy Simmonett
+                             and Daniel Smith
+                              RKS Reference
+                        1 Threads,   5100 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         O            1.011687522102    -0.008124894835     0.036027664486    15.994914619560
+         O            2.463335013180    -0.122172792801     0.018142392892    15.994914619560
+         H            0.713871576727    -0.801268205892    -0.445963990569     1.007825032070
+         H            2.620065887990    -1.072603106472     0.167162933192     1.007825032070
+
+  Running in c1 symmetry.
+
+  Rotational constants: A =      9.91525  B =      0.13857  C =      0.13709 [cm^-1]
+  Rotational constants: A = 297251.72437  B =   4154.19908  C =   4109.84953 [MHz]
+  Nuclear repulsion =   36.584866062104723
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 18
+  Nalpha       = 9
+  Nbeta        = 9
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is READ.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 18
+    Number of basis function: 38
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> DFT Potential <==
+
+   => Composite Functional: B3LYP-D3ZERO <= 
+
+    B3LYP-d3zero Hyb-GGA Exchange-Correlation Functional
+
+    P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994)
+
+    Deriv               =              1
+    GGA                 =           TRUE
+    Meta                =          FALSE
+
+    Exchange Hybrid     =           TRUE
+    MP2 Hybrid          =          FALSE
+
+   => Exchange Functionals <=
+
+    0.0800   Slater exchange
+    0.7200         Becke 88
+
+   => Exact (HF) Exchange <=
+
+    0.2000               HF 
+
+   => Correlation Functionals <=
+
+    0.1900   Vosko, Wilk & Nusair (VWN5_RPA)
+    0.8100   Lee, Yang & Parr
+
+   => Molecular Quadrature <=
+
+    Radial Scheme       =       TREUTLER
+    Pruning Scheme      =           FLAT
+    Nuclear Scheme      =       TREUTLER
+
+    BS radius alpha     =              1
+    Pruning alpha       =              1
+    Radial Points       =             75
+    Spherical Points    =            302
+    Total Points        =          88306
+    Total Blocks        =            712
+    Max Points          =            256
+    Max Functions       =             38
+
+   => -D3ZERO: Empirical Dispersion <=
+
+    Grimme's -D3 (zero-damping) Dispersion Correction
+    Grimme S.; Antony J.; Ehrlich S.; Krieg H. (2010), J. Chem. Phys., 132: 154104
+
+        S6 =   1.000000E+00
+        S8 =   1.703000E+00
+       SR6 =   1.261000E+00
+       SR8 =   1.000000E+00
+    ALPHA6 =   1.400000E+01
+
+   => Loading Basis Set <=
+
+    Name: (CC-PVDZ AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry O          line   221 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz-jkfit.gbs 
+    atoms 3-4 entry H          line    51 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz-jkfit.gbs 
+
+  Reading orbitals from file 180, no projection.
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A         38      38       0       0       0       0
+   -------------------------------------------------------
+    Total      38      38       9       9       9       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.003 [GiB]; user supplied 3.486 [GiB]. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory (MB):               3570
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-12
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (CC-PVDZ AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 66
+    Number of basis function: 186
+    Number of Cartesian functions: 212
+    Spherical Harmonics?: true
+    Max angular momentum: 3
+
+  Minimum eigenvalue in the overlap matrix is 2.5455589610E-02.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Orbitals guess was supplied from a previous computation.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RKS iter   0:  -151.54526463296523   -1.51545e+02   2.99042e-04 
+   @DF-RKS iter   1:  -151.54264059412037    2.62404e-03   7.88836e-05 
+   @DF-RKS iter   2:  -151.54264270974335   -2.11562e-06   4.04920e-05 DIIS
+   @DF-RKS iter   3:  -151.54264348110956   -7.71366e-07   7.16872e-06 DIIS
+   @DF-RKS iter   4:  -151.54264350848715   -2.73776e-08   5.45430e-07 DIIS
+   @DF-RKS iter   5:  -151.54264350870974   -2.22599e-10   1.10900e-07 DIIS
+   @DF-RKS iter   6:  -151.54264350871094   -1.19371e-12   1.12758e-07 DIIS
+   @DF-RKS iter   7:  -151.54264350871782   -6.87805e-12   1.76922e-08 DIIS
+   @DF-RKS iter   8:  -151.54264350871799   -1.70530e-13   9.09072e-10 DIIS
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1A    -19.190330     2A    -19.190298     3A     -1.109361  
+       4A     -0.892606     5A     -0.557963     6A     -0.423669  
+       7A     -0.418514     8A     -0.341608     9A     -0.255434  
+
+    Virtual:                                                              
+
+      10A      0.013743    11A      0.027199    12A      0.123045  
+      13A      0.558875    14A      0.578380    15A      0.864210  
+      16A      0.865309    17A      0.937466    18A      0.937567  
+      19A      0.999051    20A      1.037544    21A      1.261081  
+      22A      1.289373    23A      1.318978    24A      1.465431  
+      25A      1.583582    26A      1.774294    27A      2.037948  
+      28A      2.087124    29A      2.350345    30A      2.386088  
+      31A      2.604079    32A      2.891775    33A      2.899304  
+      34A      3.011650    35A      3.153873    36A      3.504505  
+      37A      3.561175    38A      3.792394  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     9 ]
+
+  Energy converged.
+
+  @DF-RKS Final Energy:  -151.54264350871799
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =             36.5848660621047230
+    One-Electron Energy =                -281.1140781643596824
+    Two-Electron Energy =                 107.4444525719297445
+    DFT Exchange-Correlation Energy =     -14.4575838083927284
+    Empirical Dispersion Energy =          -0.0003001700000000
+    VV10 Nonlocal Energy =                  0.0000000000000000
+    Total Energy =                       -151.5426435087179868
+
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:    58.8350      Y:    -5.5109      Z:     0.2921
+
+  Electronic Dipole Moment: [e a0]
+     X:   -58.9283      Y:     4.3579      Z:    -0.5123
+
+  Dipole Moment: [e a0]
+     X:    -0.0933      Y:    -1.1530      Z:    -0.2202     Total:     1.1775
+
+  Dipole Moment: [D]
+     X:    -0.2371      Y:    -2.9306      Z:    -0.5597     Total:     2.9930
+
+
+*** tstop() called on loro.prib.upf.edu at Sat Sep 29 16:37:52 2018
+Module time:
+	user time   =       2.37 seconds =       0.04 minutes
+	system time =       0.09 seconds =       0.00 minutes
+	total time  =          4 seconds =       0.07 minutes
+Total time:
+	user time   =      12.30 seconds =       0.20 minutes
+	system time =       0.36 seconds =       0.01 minutes
+	total time  =         16 seconds =       0.27 minutes
+
+*** tstart() called on loro.prib.upf.edu
+*** at Sat Sep 29 16:37:52 2018
+
+
+         ------------------------------------------------------------
+                                   SCF GRAD                          
+                          Rob Parrish, Justin Turney,                
+                       Andy Simmonett, and Alex Sokolov              
+         ------------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         O            1.011687522102    -0.008124894835     0.036027664486    15.994914619560
+         O            2.463335013180    -0.122172792801     0.018142392892    15.994914619560
+         H            0.713871576727    -0.801268205892    -0.445963990569     1.007825032070
+         H            2.620065887990    -1.072603106472     0.167162933192     1.007825032070
+
+  Nuclear repulsion =   36.584866062104723
+
+  ==> Basis Set <==
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 18
+    Number of basis function: 38
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> DFJKGrad: Density-Fitted SCF Gradients <==
+
+    Gradient:                    1
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory (MB):              3570
+    Schwarz Cutoff:          0E+00
+    Fitting Condition:       1E-12
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (CC-PVDZ AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 66
+    Number of basis function: 186
+    Number of Cartesian functions: 212
+    Spherical Harmonics?: true
+    Max angular momentum: 3
+
+  ==> DFT Potential <==
+
+   => Composite Functional: B3LYP-D3ZERO <= 
+
+    B3LYP-d3zero Hyb-GGA Exchange-Correlation Functional
+
+    P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994)
+
+    Deriv               =              1
+    GGA                 =           TRUE
+    Meta                =          FALSE
+
+    Exchange Hybrid     =           TRUE
+    MP2 Hybrid          =          FALSE
+
+   => Exchange Functionals <=
+
+    0.0800   Slater exchange
+    0.7200         Becke 88
+
+   => Exact (HF) Exchange <=
+
+    0.2000               HF 
+
+   => Correlation Functionals <=
+
+    0.1900   Vosko, Wilk & Nusair (VWN5_RPA)
+    0.8100   Lee, Yang & Parr
+
+   => Molecular Quadrature <=
+
+    Radial Scheme       =       TREUTLER
+    Pruning Scheme      =           FLAT
+    Nuclear Scheme      =       TREUTLER
+
+    BS radius alpha     =              1
+    Pruning alpha       =              1
+    Radial Points       =             75
+    Spherical Points    =            302
+    Total Points        =          88306
+    Total Blocks        =            712
+    Max Points          =            256
+    Max Functions       =             38
+
+
+  -Total Gradient:
+     Atom            X                  Y                   Z
+    ------   -----------------  -----------------  -----------------
+       1       -0.001108140009     0.003213419508    -0.006343144281
+       2        0.001404677034     0.000454962863     0.007043234010
+       3       -0.000217495145    -0.002803118130     0.004738135314
+       4       -0.000079578938    -0.000871900010    -0.005439492402
+
+
+*** tstop() called on loro.prib.upf.edu at Sat Sep 29 16:37:53 2018
+Module time:
+	user time   =       0.66 seconds =       0.01 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =      12.97 seconds =       0.22 minutes
+	system time =       0.38 seconds =       0.01 minutes
+	total time  =         17 seconds =       0.28 minutes
+
+			-----------------------------------------
+			 OPTKING 2.0: for geometry optimizations 
+			  - R.A. King,  Bethel University        
+			-----------------------------------------
+	At level 1: Red. Int., RFO, no backsteps, dynamic trust
+
+	Previous internal coordinate definitions found.
+	---Fragment 1 Geometry and Gradient---
+	 O           1.9118123488       -0.0153538261        0.0680824191
+	 O           4.6550285485       -0.2308731193        0.0342841540
+	 H           1.3490217741       -1.5141774681       -0.8427498073
+	 H           4.9512069784       -2.0269261205        0.3158921633
+	            -0.0011081400        0.0032134195       -0.0063431443
+	             0.0014046770        0.0004549629        0.0070432340
+	            -0.0002174951       -0.0028031181        0.0047381353
+	            -0.0000795789       -0.0008719000       -0.0054394924
+
+	---Fragment 1 Intrafragment Coordinates---
+	 - Coordinate -           - BOHR/RAD -       - ANG/DEG -
+	 R(1,2)           =         2.751877	       1.456230
+	 R(1,3)           =         1.841961	       0.974724
+	 R(2,4)           =         1.841964	       0.974725
+	 B(1,2,4)         =         1.807785	     103.578437
+	 B(2,1,3)         =         1.807785	     103.578441
+	*D(3,1,2,4)       =        -0.698132	     -40.000022
+
+	Current energy   :      -151.5426435087
+
+	Energy change for the previous step:
+		Projected    :        -0.0000474002
+		Actual       :        -0.0000336742
+
+	Performing BFGS update.
+	Previous computed or guess Hessian on step 1.
+	Steps to be used in Hessian update: 3 2
+	Taking RFO optimization step.
+	Going to follow RFO solution 1.
+	Using RFO vector 1.
+	Norm of target step-size    0.00490
+	Projected energy change by RFO approximation:        -0.0000051542
+
+	Back-transformation to cartesian coordinates...
+	Successfully converged to displaced geometry.
+
+	Back-transformation to cartesian coordinates to adjust frozen coordinates...
+	Successfully converged to displaced geometry.
+
+	--- Internal Coordinate Step in ANG or DEG, aJ/ANG or AJ/DEG ---
+	 ---------------------------------------------------------------------------
+	   Coordinate                Previous        Force       Change         New 
+	   ----------                --------       ------       ------       ------
+	    1 R(1,2)          =      1.456230    -0.010986    -0.002556     1.453675
+	    2 R(1,3)          =      0.974724    -0.000026    -0.000036     0.974688
+	    3 R(2,4)          =      0.974725    -0.000037    -0.000037     0.974688
+	    4 B(1,2,4)        =    103.578437    -0.000008     0.032002   103.610439
+	    5 B(2,1,3)        =    103.578441    -0.000008     0.031987   103.610428
+	    6 *D(3,1,2,4)     =    -40.000022     0.000000     0.000000   -40.000022
+	 ---------------------------------------------------------------------------
+	Successfully symmetrized geometry.
+
+  ==> Convergence Check <==
+
+  Measures of convergence in internal coordinates in au.
+  Criteria marked as inactive (o), active & met (*), and active & unmet ( ).
+  ---------------------------------------------------------------------------------------------
+   Step     Total Energy     Delta E     MAX Force     RMS Force      MAX Disp      RMS Disp   
+  ---------------------------------------------------------------------------------------------
+    Convergence Criteria    1.00e-06 *    3.00e-04 *             o    1.20e-03 *             o
+  ---------------------------------------------------------------------------------------------
+      4    -151.54264351   -3.37e-05      1.33e-03      5.48e-04 o    4.83e-03      2.00e-03 o  ~
+  ---------------------------------------------------------------------------------------------
+
+	Writing optimization data to binary file.
+	Structure for next step:
+	Cartesian Geometry (in Angstrom)
+	    O     1.0129552494  -0.0083169772   0.0360861569
+	    O     2.4620552723  -0.1221312643   0.0180552973
+	    H     0.7145922799  -0.8012819942  -0.4457872031
+	    H     2.6193571984  -1.0724387643   0.1670147490
+			--------------------------
+			 OPTKING Finished Execution 
+			--------------------------
+
+    Structure for next step:
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+    O            1.012955249446    -0.008316977180     0.036086156852
+    O            2.462055272304    -0.122131264281     0.018055297291
+    H            0.714592279867    -0.801281994215    -0.445787203136
+    H            2.619357198383    -1.072438764325     0.167014748993
+
+gradient() will perform analytic gradient computation.
+
+*** tstart() called on loro.prib.upf.edu
+*** at Sat Sep 29 16:37:53 2018
+
+   => Loading Basis Set <=
+
+    Name: CC-PVDZ
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry O          line   198 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz.gbs 
+    atoms 3-4 entry H          line    22 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+            by Justin Turney, Rob Parrish, Andy Simmonett
+                             and Daniel Smith
+                              RKS Reference
+                        1 Threads,   5100 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         O            1.012955249446    -0.008316977180     0.036086156852    15.994914619560
+         O            2.462055272304    -0.122131264281     0.018055297291    15.994914619560
+         H            0.714592279867    -0.801281994215    -0.445787203136     1.007825032070
+         H            2.619357198383    -1.072438764325     0.167014748993     1.007825032070
+
+  Running in c1 symmetry.
+
+  Rotational constants: A =      9.91920  B =      0.13864  C =      0.13716 [cm^-1]
+  Rotational constants: A = 297370.14317  B =   4156.33643  C =   4111.95541 [MHz]
+  Nuclear repulsion =   36.630480471862668
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 18
+  Nalpha       = 9
+  Nbeta        = 9
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is READ.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 18
+    Number of basis function: 38
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> DFT Potential <==
+
+   => Composite Functional: B3LYP-D3ZERO <= 
+
+    B3LYP-d3zero Hyb-GGA Exchange-Correlation Functional
+
+    P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994)
+
+    Deriv               =              1
+    GGA                 =           TRUE
+    Meta                =          FALSE
+
+    Exchange Hybrid     =           TRUE
+    MP2 Hybrid          =          FALSE
+
+   => Exchange Functionals <=
+
+    0.0800   Slater exchange
+    0.7200         Becke 88
+
+   => Exact (HF) Exchange <=
+
+    0.2000               HF 
+
+   => Correlation Functionals <=
+
+    0.1900   Vosko, Wilk & Nusair (VWN5_RPA)
+    0.8100   Lee, Yang & Parr
+
+   => Molecular Quadrature <=
+
+    Radial Scheme       =       TREUTLER
+    Pruning Scheme      =           FLAT
+    Nuclear Scheme      =       TREUTLER
+
+    BS radius alpha     =              1
+    Pruning alpha       =              1
+    Radial Points       =             75
+    Spherical Points    =            302
+    Total Points        =          88304
+    Total Blocks        =            711
+    Max Points          =            255
+    Max Functions       =             38
+
+   => -D3ZERO: Empirical Dispersion <=
+
+    Grimme's -D3 (zero-damping) Dispersion Correction
+    Grimme S.; Antony J.; Ehrlich S.; Krieg H. (2010), J. Chem. Phys., 132: 154104
+
+        S6 =   1.000000E+00
+        S8 =   1.703000E+00
+       SR6 =   1.261000E+00
+       SR8 =   1.000000E+00
+    ALPHA6 =   1.400000E+01
+
+   => Loading Basis Set <=
+
+    Name: (CC-PVDZ AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1-2 entry O          line   221 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz-jkfit.gbs 
+    atoms 3-4 entry H          line    51 file /shared/joao/test_parameterize/miniconda3/share/psi4/basis/cc-pvdz-jkfit.gbs 
+
+  Reading orbitals from file 180, no projection.
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     A         38      38       0       0       0       0
+   -------------------------------------------------------
+    Total      38      38       9       9       9       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.003 [GiB]; user supplied 3.486 [GiB]. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory (MB):               3570
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-12
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (CC-PVDZ AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 66
+    Number of basis function: 186
+    Number of Cartesian functions: 212
+    Spherical Harmonics?: true
+    Max angular momentum: 3
+
+  Minimum eigenvalue in the overlap matrix is 2.5331581534E-02.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Orbitals guess was supplied from a previous computation.
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-RKS iter   0:  -151.54388958503276   -1.51544e+02   1.34512e-04 
+   @DF-RKS iter   1:  -151.54264611562169    1.24347e-03   3.23785e-05 
+   @DF-RKS iter   2:  -151.54264647697664   -3.61355e-07   1.65623e-05 DIIS
+   @DF-RKS iter   3:  -151.54264660488164   -1.27905e-07   2.82600e-06 DIIS
+   @DF-RKS iter   4:  -151.54264660912673   -4.24509e-09   2.51777e-07 DIIS
+   @DF-RKS iter   5:  -151.54264660916755   -4.08136e-11   3.54625e-08 DIIS
+   @DF-RKS iter   6:  -151.54264660916814   -5.96856e-13   1.81143e-08 DIIS
+   @DF-RKS iter   7:  -151.54264660916812    2.84217e-14   9.70723e-09 DIIS
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1A    -19.190151     2A    -19.190119     3A     -1.110351  
+       4A     -0.892157     5A     -0.558592     6A     -0.423849  
+       7A     -0.418801     8A     -0.341451     9A     -0.255045  
+
+    Virtual:                                                              
+
+      10A      0.015067    11A      0.027159    12A      0.123594  
+      13A      0.558853    14A      0.578515    15A      0.864592  
+      16A      0.865468    17A      0.936903    18A      0.937248  
+      19A      0.998842    20A      1.037626    21A      1.260810  
+      22A      1.289494    23A      1.318897    24A      1.466122  
+      25A      1.584432    26A      1.774668    27A      2.038208  
+      28A      2.087445    29A      2.348701    30A      2.388009  
+      31A      2.602693    32A      2.891594    33A      2.899324  
+      34A      3.014637    35A      3.156361    36A      3.505600  
+      37A      3.560721    38A      3.794847  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     9 ]
+
+  Energy converged.
+
+  @DF-RKS Final Energy:  -151.54264660916812
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =             36.6304804718626684
+    One-Electron Energy =                -281.2032152069349422
+    Two-Electron Energy =                 107.4889399375241794
+    DFT Exchange-Correlation Energy =     -14.4585537216200297
+    Empirical Dispersion Energy =          -0.0002980900000000
+    VV10 Nonlocal Energy =                  0.0000000000000000
+    Total Energy =                       -151.5426466091681448
+
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:    58.8348      Y:    -5.5129      Z:     0.2917
+
+  Electronic Dipole Moment: [e a0]
+     X:   -58.9281      Y:     4.3600      Z:    -0.5119
+
+  Dipole Moment: [e a0]
+     X:    -0.0933      Y:    -1.1529      Z:    -0.2202     Total:     1.1774
+
+  Dipole Moment: [D]
+     X:    -0.2371      Y:    -2.9304      Z:    -0.5596     Total:     2.9927
+
+
+*** tstop() called on loro.prib.upf.edu at Sat Sep 29 16:37:57 2018
+Module time:
+	user time   =       2.19 seconds =       0.04 minutes
+	system time =       0.07 seconds =       0.00 minutes
+	total time  =          4 seconds =       0.07 minutes
+Total time:
+	user time   =      15.17 seconds =       0.25 minutes
+	system time =       0.45 seconds =       0.01 minutes
+	total time  =         21 seconds =       0.35 minutes
+
+*** tstart() called on loro.prib.upf.edu
+*** at Sat Sep 29 16:37:57 2018
+
+
+         ------------------------------------------------------------
+                                   SCF GRAD                          
+                          Rob Parrish, Justin Turney,                
+                       Andy Simmonett, and Alex Sokolov              
+         ------------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         O            1.012955249446    -0.008316977180     0.036086156852    15.994914619560
+         O            2.462055272304    -0.122131264281     0.018055297291    15.994914619560
+         H            0.714592279867    -0.801281994215    -0.445787203136     1.007825032070
+         H            2.619357198383    -1.072438764325     0.167014748993     1.007825032070
+
+  Nuclear repulsion =   36.630480471862668
+
+  ==> Basis Set <==
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 18
+    Number of basis function: 38
+    Number of Cartesian functions: 40
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> DFJKGrad: Density-Fitted SCF Gradients <==
+
+    Gradient:                    1
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    OpenMP threads:              1
+    Integrals threads:           1
+    Memory (MB):              3570
+    Schwarz Cutoff:          0E+00
+    Fitting Condition:       1E-12
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (CC-PVDZ AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 66
+    Number of basis function: 186
+    Number of Cartesian functions: 212
+    Spherical Harmonics?: true
+    Max angular momentum: 3
+
+  ==> DFT Potential <==
+
+   => Composite Functional: B3LYP-D3ZERO <= 
+
+    B3LYP-d3zero Hyb-GGA Exchange-Correlation Functional
+
+    P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994)
+
+    Deriv               =              1
+    GGA                 =           TRUE
+    Meta                =          FALSE
+
+    Exchange Hybrid     =           TRUE
+    MP2 Hybrid          =          FALSE
+
+   => Exchange Functionals <=
+
+    0.0800   Slater exchange
+    0.7200         Becke 88
+
+   => Exact (HF) Exchange <=
+
+    0.2000               HF 
+
+   => Correlation Functionals <=
+
+    0.1900   Vosko, Wilk & Nusair (VWN5_RPA)
+    0.8100   Lee, Yang & Parr
+
+   => Molecular Quadrature <=
+
+    Radial Scheme       =       TREUTLER
+    Pruning Scheme      =           FLAT
+    Nuclear Scheme      =       TREUTLER
+
+    BS radius alpha     =              1
+    Pruning alpha       =              1
+    Radial Points       =             75
+    Spherical Points    =            302
+    Total Points        =          88304
+    Total Blocks        =            711
+    Max Points          =            255
+    Max Functions       =             38
+
+
+  -Total Gradient:
+     Atom            X                  Y                   Z
+    ------   -----------------  -----------------  -----------------
+       1        0.000179720436     0.003142900961    -0.006349057070
+       2        0.000121948514     0.000587124509     0.007061184905
+       3       -0.000132101727    -0.002845152460     0.004752298678
+       4       -0.000170085984    -0.000891283568    -0.005465650782
+
+
+*** tstop() called on loro.prib.upf.edu at Sat Sep 29 16:37:58 2018
+Module time:
+	user time   =       0.62 seconds =       0.01 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          1 seconds =       0.02 minutes
+Total time:
+	user time   =      15.79 seconds =       0.26 minutes
+	system time =       0.47 seconds =       0.01 minutes
+	total time  =         22 seconds =       0.37 minutes
+
+			-----------------------------------------
+			 OPTKING 2.0: for geometry optimizations 
+			  - R.A. King,  Bethel University        
+			-----------------------------------------
+	At level 1: Red. Int., RFO, no backsteps, dynamic trust
+
+	Previous internal coordinate definitions found.
+	---Fragment 1 Geometry and Gradient---
+	 O           1.9142080063       -0.0157168091        0.0681929536
+	 O           4.6526101887       -0.2307946418        0.0341195671
+	 H           1.3503837056       -1.5142035243       -0.8424157275
+	 H           4.9498677491       -2.0266155589        0.3156121357
+	             0.0001797204        0.0031429010       -0.0063490571
+	             0.0001219485        0.0005871245        0.0070611849
+	            -0.0001321017       -0.0028451525        0.0047522987
+	            -0.0001700860       -0.0008912836       -0.0054656508
+
+	---Fragment 1 Intrafragment Coordinates---
+	 - Coordinate -           - BOHR/RAD -       - ANG/DEG -
+	 R(1,2)           =         2.747047	       1.453675
+	 R(1,3)           =         1.841893	       0.974688
+	 R(2,4)           =         1.841894	       0.974688
+	 B(1,2,4)         =         1.808343	     103.610439
+	 B(2,1,3)         =         1.808343	     103.610428
+	*D(3,1,2,4)       =        -0.698132	     -40.000022
+
+	Current energy   :      -151.5426466092
+
+	Energy change for the previous step:
+		Projected    :        -0.0000051542
+		Actual       :        -0.0000031005
+
+	Performing BFGS update.
+	Previous computed or guess Hessian on step 1.
+	Steps to be used in Hessian update: 4 3
+	Taking RFO optimization step.
+	Going to follow RFO solution 1.
+	Using RFO vector 1.
+	Norm of target step-size    0.00041
+	Projected energy change by RFO approximation:        -0.0000000030
+
+	Back-transformation to cartesian coordinates...
+	Successfully converged to displaced geometry.
+
+	Back-transformation to cartesian coordinates to adjust frozen coordinates...
+	Successfully converged to displaced geometry.
+
+	--- Internal Coordinate Step in ANG or DEG, aJ/ANG or AJ/DEG ---
+	 ---------------------------------------------------------------------------
+	   Coordinate                Previous        Force       Change         New 
+	   ----------                --------       ------       ------       ------
+	    1 R(1,2)          =      1.453675     0.000366     0.000020     1.453694
+	    2 R(1,3)          =      0.974688    -0.000037     0.000000     0.974688
+	    3 R(2,4)          =      0.974688    -0.000042    -0.000001     0.974688
+	    4 B(1,2,4)        =    103.610439     0.000005     0.016339   103.626778
+	    5 B(2,1,3)        =    103.610428     0.000005     0.016349   103.626776
+	    6 *D(3,1,2,4)     =    -40.000022     0.000000    -0.000000   -40.000022
+	 ---------------------------------------------------------------------------
+	Successfully symmetrized geometry.
+
+  ==> Convergence Check <==
+
+  Measures of convergence in internal coordinates in au.
+  Criteria marked as inactive (o), active & met (*), and active & unmet ( ).
+  ---------------------------------------------------------------------------------------------
+   Step     Total Energy     Delta E     MAX Force     RMS Force      MAX Disp      RMS Disp   
+  ---------------------------------------------------------------------------------------------
+    Convergence Criteria    1.00e-06 *    3.00e-04 *             o    1.20e-03 *             o
+  ---------------------------------------------------------------------------------------------
+      5    -151.54264661   -3.10e-06      6.37e-05 *    4.11e-05 o    2.85e-04 *    1.65e-04 o  ~
+  ---------------------------------------------------------------------------------------------
+
+
+  **** Optimization is complete! (in 5 steps) ****
+
+  ==> Optimization Summary <==
+
+  Measures of convergence in internal coordinates in au.
+  --------------------------------------------------------------------------------------------------------------- ~
+   Step         Total Energy             Delta E       MAX Force       RMS Force        MAX Disp        RMS Disp  ~
+  --------------------------------------------------------------------------------------------------------------- ~
+      1    -151.539191928808   -151.539191928808      0.02874289      0.01834806      0.16788067      0.09892070  ~
+      2    -151.541674225668     -0.002482296860      0.01763885      0.01002814      0.04458377      0.02879136  ~
+      3    -151.542609834516     -0.000935608848      0.00463647      0.00197146      0.01091292      0.00449122  ~
+      4    -151.542643508718     -0.000033674202      0.00133347      0.00054762      0.00483004      0.00199844  ~
+      5    -151.542646609168     -0.000003100450      0.00006366      0.00004106      0.00028534      0.00016539  ~
+  --------------------------------------------------------------------------------------------------------------- ~
+
+	Writing optimization data to binary file.
+	Final energy is   -151.5426466091681
+	Final (previous) structure:
+	Cartesian Geometry (in Angstrom)
+	    O     1.0129552494  -0.0083169772   0.0360861569
+	    O     2.4620552723  -0.1221312643   0.0180552973
+	    H     0.7145922799  -0.8012819942  -0.4457872031
+	    H     2.6193571984  -1.0724387643   0.1670147490
+	Saving final (previous) structure.
+	Removing binary optimization data file.
+			--------------------------
+			 OPTKING Finished Execution 
+			--------------------------
+
+    Final optimized geometry and variables:
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+    O            1.012955249446    -0.008316977180     0.036086156852
+    O            2.462055272304    -0.122131264281     0.018055297291
+    H            0.714592279867    -0.801281994215    -0.445787203136
+    H            2.619357198383    -1.072438764325     0.167014748993
+
+	Removing binary optimization data file.
+	Cleaning optimization helper files.
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+OEProp: No title given, name of density matrix used for the following properties is 'SCF density'
+  Nuclear Dipole Moment: [e a0]
+     X:    58.8348      Y:    -5.5129      Z:     0.2917
+
+  Electronic Dipole Moment: [e a0]
+     X:   -58.9281      Y:     4.3600      Z:    -0.5119
+
+  Dipole Moment: [e a0]
+     X:    -0.0933      Y:    -1.1529      Z:    -0.2202     Total:     1.1774
+
+  Dipole Moment: [D]
+     X:    -0.2371      Y:    -2.9304      Z:    -0.5596     Total:     2.9927
+
+  Quadrupole Moment: [D A]
+    XX:   -11.4180     YY:    -8.4056     ZZ:   -11.7908
+    XY:    -5.1520     XZ:     0.2211     YZ:     0.4444
+
+  Traceless Quadrupole Moment: [D A]
+    XX:    -0.8799     YY:     2.1325     ZZ:    -1.2527
+    XY:    -5.1520     XZ:     0.2211     YZ:     0.4444
+
+  Mulliken Charges: (a.u.)
+   Center  Symbol    Alpha    Beta     Spin     Total
+       1     O     4.08220  4.08220  0.00000 -0.16440
+       2     O     4.08220  4.08220  0.00000 -0.16440
+       3     H     0.41780  0.41780  0.00000  0.16440
+       4     H     0.41780  0.41780  0.00000  0.16440
+
+   Total alpha =  9.00000, Total beta =  9.00000, Total charge =  0.00000
+
+
+    Psi4 stopped on: Saturday, 29 September 2018 04:37PM
+    Psi4 wall time for execution: 0:00:23.01
+
+*** Psi4 exiting successfully. Buy a developer a beer!

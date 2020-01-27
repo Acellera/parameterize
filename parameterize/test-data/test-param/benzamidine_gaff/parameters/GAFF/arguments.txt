@@ -1,0 +1,26 @@
+=== Arguments ===
+               basis: 6-311++G**
+              charge: 1
+         charge_type: Gasteiger
+                code: Psi4
+               debug: False
+      dihed_fit_type: iterative
+dihed_num_iterations: 3
+      dihed_opt_type: mm
+            dihedral: []
+         environment: vacuum
+            filename: input.mol2
+        fit_dihedral: False
+          fix_charge: []
+          forcefield: GAFF
+           groupname: None
+                list: False
+              memory: None
+            min_type: None
+               ncpus: None
+                 nnp: None
+              outdir: ./
+               queue: local
+             rtf_prm: None
+                seed: 20170920
+              theory: wB97X-D

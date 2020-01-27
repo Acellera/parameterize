@@ -1,0 +1,9 @@
+MODEL        1
+HETATM    1  O   HOH     1       1.060   0.063  -0.029  0.00  0.00      L    O  
+HETATM    2  H   HOH     0       2.020   0.086  -0.019  0.00  0.00      L    H  
+HETATM    3  H0  HOH     0       0.764   0.904   0.328  0.00  0.00      L    H  
+CONECT    1    2    3
+CONECT    2    1
+CONECT    3    1
+ENDMDL
+END
