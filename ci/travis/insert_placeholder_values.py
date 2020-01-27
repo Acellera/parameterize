@@ -13,7 +13,7 @@ except Exception as e:
     )
     version = "0"
 
-with open("requirements.txt", "r") as f:
+with open("DEPENDENCIES", "r") as f:
     deps = f.readlines()
 
 # Fix conda meta.yaml

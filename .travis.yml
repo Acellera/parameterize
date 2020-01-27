@@ -26,7 +26,7 @@ env:
   global:
     - MINICONDA_DIR="$HOME/miniconda"
     - PYTHONHASHSEED=0
-    
+
 before_install:
   - source ci/travis/install_miniconda.sh
 
@@ -46,7 +46,7 @@ script:
   - export BUILD_NUMBER=0
 
   # Install the Conda dependencies parameterize needs
-  - conda install --file requirements.txt -y -c acellera -c psi4 -c conda-forge
+  - conda install --file DEPENDENCIES -y -c acellera -c psi4 -c conda-forge
 
   # Build and install parameterize
   - conda build --python $TRAVIS_PYTHON_VERSION package/parameterize --no-include-recipe -c acellera -c psi4 -c conda-forge
