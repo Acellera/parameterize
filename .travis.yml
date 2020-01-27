@@ -6,13 +6,13 @@ matrix:
     - os: linux
       language: python
       python:
-        - "3.6"
-      env: OSNAME=Linux
+        - '3.6'
+      env: OSNAME=Linux CONDA_PY=3.6
     - os: linux
       language: python
       python:
-        - "3.7"
-      env: OSNAME=Linux
+        - '3.7'
+      env: OSNAME=Linux CONDA_PY=3.7
 # TODO: Uncomment when MacOS comes back (travis-ci/travis-ci#9075)
 #    - os: osx
 #      language: generic
