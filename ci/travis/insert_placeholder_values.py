@@ -16,17 +16,6 @@ except Exception as e:
 with open("requirements.txt", "r") as f:
     deps = f.readlines()
 
-
-# Fix setuptools setup.py
-with open("setup.py", "r") as f:
-    text = f.read()
-
-text = text.replace("PARAMETERIZE_VERSION_PLACEHOLDER", version)
-text = text.replace("PYTHON_VERSION_PLACEHOLDER", os.getenv("CONDA_PY"))
-
-with open("setup.py", "w") as f:
-    f.write(text)
-
 # Fix conda meta.yaml
 with open("package/parameterize/meta.yaml", "r") as f:
     text = f.read()
