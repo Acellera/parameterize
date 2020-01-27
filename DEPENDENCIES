@@ -1,5 +1,4 @@
 numpy>=1.17
-htmd  # Remove this dep once we separate ffevaluate and playqueue from HTMD
 jobqueues
 moleculekit
 networkx
