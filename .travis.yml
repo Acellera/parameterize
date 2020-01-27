@@ -48,6 +48,8 @@ script:
   # Install the Conda dependencies parameterize needs
   - conda install --file DEPENDENCIES -y -c acellera -c psi4 -c conda-forge
 
+  - python ci/travis/insert_placeholder_values.py
+
   # Build and install parameterize
   - conda build --python $TRAVIS_PYTHON_VERSION package/parameterize --no-include-recipe -c acellera -c psi4 -c conda-forge
   - conda install $HOME/miniconda/conda-bld/*-64/parameterize-[0-9]*.tar.bz2 -y -q -c acellera -c psi4 -c conda-forge
