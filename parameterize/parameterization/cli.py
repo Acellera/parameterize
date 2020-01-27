@@ -395,7 +395,7 @@ def _get_queue(args):
 
         queue = PBSQueue()  # TODO: configure
     elif args.queue == "PlayQueue":
-        from htmd.queues.playqueue import PlayQueue
+        from parameterize.playqueue import PlayQueue
 
         queue = PlayQueue()  # TODO: configure
         queue.token = args.pm_token
@@ -681,7 +681,7 @@ def _fit_charges(mol, args, qm, atom_types):
 
 def _printEnergies(molecule, parameters, filename):
 
-    from htmd.ffevaluation.ffevaluate import FFEvaluate
+    from ffevaluation.ffevaluate import FFEvaluate
 
     energies = FFEvaluate(molecule, parameters).calculateEnergies(
         molecule.coords[:, :, 0]

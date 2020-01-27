@@ -19,7 +19,7 @@ from simtk.openmm import app
 
 from moleculekit.dihedral import dihedralAngle
 from parameterize.qm.base import QMBase, QMResult
-from htmd.ffevaluation.ffevaluate import FFEvaluate
+from ffevaluation.ffevaluate import FFEvaluate
 from parameterize.parameterization.util import getDipole
 
 logger = logging.getLogger(__name__)

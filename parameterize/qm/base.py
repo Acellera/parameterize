@@ -13,7 +13,7 @@ import numpy as np
 from protocolinterface import ProtocolInterface, val
 
 from jobqueues.localqueue import LocalCPUQueue
-from htmd.queues.playqueue import PlayQueue
+from parameterize.playqueue import PlayQueue
 
 logger = logging.getLogger(__name__)
 
