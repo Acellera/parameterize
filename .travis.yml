@@ -22,6 +22,11 @@ matrix:
 #        - brew cask uninstall oclint
 #        - brew install gcc
 
+env:
+  global:
+    - MINICONDA_DIR="$HOME/miniconda"
+    - PYTHONHASHSEED=0
+    
 before_install:
   - source ci/travis/install_miniconda.sh
 
