@@ -33,6 +33,11 @@ if __name__ == "__main__":
         ),
         package_data={"parameterize": ["logging.ini"],},
         test_suite="setup.my_test_suite",
+        entry_points={
+            "console_scripts": [
+                "parameterize = parameterize.parameterization.cli:main_parameterize",
+            ]
+        },
         install_requires=requirements,
     )
 
