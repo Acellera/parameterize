@@ -1,0 +1,67 @@
+sudo: required
+dist: bionic
+
+matrix:
+  include:
+    - os: linux
+      language: python
+      python:
+        - "3.6"
+      env: OSNAME=Linux
+    - os: linux
+      language: python
+      python:
+        - "3.7"
+      env: OSNAME=Linux
+# TODO: Uncomment when MacOS comes back (travis-ci/travis-ci#9075)
+#    - os: osx
+#      language: generic
+#      env: TRAVIS_PYTHON_VERSION=3.6 OSNAME=Darwin
+#      before_install:
+#        - brew update
+#        - brew cask uninstall oclint
+#        - brew install gcc
+
+before_install:
+  - source ci/travis/install_miniconda.sh
+
+script:
+  - source activate test
+
+  - echo "python $TRAVIS_PYTHON_VERSION*" > $HOME/miniconda/envs/test/conda-meta/pinned
+  - conda update --all -y -q
+
+  - if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ]; then export BUILD_VERSION=$TRAVIS_TAG; else export BUILD_VERSION=0.0.0; fi
+  - echo "TRAVIS_BRANCH = $TRAVIS_BRANCH"
+  - echo "TRAVIS_TAG    = $TRAVIS_TAG"
+  - echo "TRAVIS_PULL_REQUEST = $TRAVIS_PULL_REQUEST"
+  - echo "TRAVIS_REPO_SLUG = $TRAVIS_REPO_SLUG"
+  - echo "BUILD_VERSION = $BUILD_VERSION"
+  # Always set it to 0 so we don't get a new release at every successful commit
+  - export BUILD_NUMBER=0
+
+  # Install the Conda dependencies parameterize needs
+  - conda install --file requirements.txt -y -c acellera -c psi4 -c conda-forge
+
+  # Build and install parameterize
+  - conda build --python $TRAVIS_PYTHON_VERSION package/parameterize --no-include-recipe -c acellera -c psi4 -c conda-forge
+  - conda install $HOME/miniconda/conda-bld/*-64/parameterize-[0-9]*.tar.bz2 -y -q -c acellera -c psi4 -c conda-forge
+
+  # Cleaning to reduce amount of space used on disk
+  - conda clean --all -y
+
+  # Run tests
+  - coverage run -m unittest discover --start-directory ./parameterize --pattern "*.py"
+  - echo "Finished tests"
+
+after_success:
+  - echo "Attempting codecov statistics upload"
+  - codecov
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: bash ci/travis/deploy.sh
+    on:
+      tags: true
+      branch: master
