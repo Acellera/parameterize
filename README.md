@@ -9,7 +9,7 @@
 ## Installation
 
 ```
-conda install -c psi4 -c acellera -c conda-forge parameterize
+conda install -c acellera -c psi4 -c conda-forge parameterize
 ```
 
 ## Quick start
