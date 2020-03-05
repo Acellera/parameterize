@@ -1,4 +1,13 @@
 dist: bionic
+addons:
+  apt:
+    # System conda installation: https://docs.conda.io/projects/conda/en/latest/user-guide/install/rpm-debian.html
+    sources:
+      - sourceline: 'deb https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main'
+        key_url: https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc
+    packages:
+      - conda
+
 language: python
 
 jobs:
