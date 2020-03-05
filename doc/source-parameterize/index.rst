@@ -1,7 +1,7 @@
 Parameterize
 ============
 
-``parameterize`` is a tool to obtain force field parameters for new molecules easily and efficiently.
+``parameterize`` is a molecular force field parameterization tool.
 
 Commonly used AMBER and CHARMM force fields contain parameters for biomolecules (proteins, nucleotides, saccharides,
 lipids, etc.), but lack parameters for other biologically relevant molecules (co-factors, drugs, etc.).
@@ -31,7 +31,7 @@ dihedral angle parameters. It fundamentally solves the problem of transferabilit
     * CGenFF (for CHARMM)
 * Supported QM codes:
     * Psi4
-    * Gaussian (experimental)
+    * TeraChem (experimental)
 * Atomic charges:
     * Fitted to reproduce the electrostatic potential (ESP) of QM
     * Selected charges can be fixed during the fitting
