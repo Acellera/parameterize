@@ -30,6 +30,6 @@ else # if it does not exist, we need to install miniconda
 fi
 
 # we want to have an up to date conda-build.
-conda install -q conda-build=3
-conda info -a # for debugging
-conda create -q -n test python=$TRAVIS_PYTHON_VERSION
+# conda install -q conda-build=3
+# conda info -a # for debugging
+# conda create -q -n test python=$TRAVIS_PYTHON_VERSION

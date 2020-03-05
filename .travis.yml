@@ -33,13 +33,24 @@ env:
     - PYTHONHASHSEED=0
 
 before_install:
-  - source ci/travis/install_miniconda.sh
+  # Enable conda
+  - /opt/conda/bin/conda init bash
+  - . ~/.bashrc
+  - conda info
+
+  #- source ci/travis/install_miniconda.sh
+  #- conda install -q conda-build=3
+  #- conda info -a # for debugging
+  #- conda create -q -n test python=$TRAVIS_PYTHON_VERSION
 
 script:
-  - source activate test
 
-  - echo "python $TRAVIS_PYTHON_VERSION*" > $HOME/miniconda/envs/test/conda-meta/pinned
-  - conda update --all -y -q
+  # Create a build enviroment
+  - conda create -n build -y conda-build
+  - conda activate build
+
+  #- echo "python $TRAVIS_PYTHON_VERSION*" > $HOME/miniconda/envs/test/conda-meta/pinned
+  #- conda update --all -y -q
 
   - if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ]; then export BUILD_VERSION=$TRAVIS_TAG; else export BUILD_VERSION=0.0.0; fi
   - echo "TRAVIS_BRANCH = $TRAVIS_BRANCH"
@@ -51,16 +62,21 @@ script:
   - export BUILD_NUMBER=0
 
   # Install the Conda dependencies parameterize needs
-  - conda install --file DEPENDENCIES -y -c acellera -c psi4 -c conda-forge
+  #- conda install --file DEPENDENCIES -y -c acellera -c psi4 -c conda-forge
 
   - python ci/travis/insert_placeholder_values.py
 
   # Build and install parameterize
   - conda build --python $TRAVIS_PYTHON_VERSION package/parameterize --no-include-recipe -c acellera -c psi4 -c conda-forge
-  - conda install $HOME/miniconda/conda-bld/*-64/parameterize-[0-9]*.tar.bz2 -y -q -c acellera -c psi4 -c conda-forge
+  #- conda install $HOME/miniconda/conda-bld/*-64/parameterize-[0-9]*.tar.bz2 -y -q -c acellera -c psi4 -c conda-forge
+
+  # Create a test environment
+  - conda create -n test -y -c local -c acellera -c psi4 -c conda-forge --file DEPENDENCIES python=$TRAVIS_PYTHON_VERSION
+  - conda activate test
+  - conda install -y ~/.conda/envs/build/conda-bld/linux-64/parameterize-*.tar.bz2
 
   # Cleaning to reduce amount of space used on disk
-  - conda clean --all -y
+  #- conda clean --all -y
 
   # Run tests
   - pip install -q codecov coverage
