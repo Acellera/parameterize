@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Acellera/parameterize.svg?branch=master)](https://travis-ci.org/Acellera/parameterize)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/Acellera/parameterize.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Acellera/parameterize/context:python)
 [![Anaconda-Server Badge](https://anaconda.org/acellera/parameterize/badges/version.svg)](https://anaconda.org/acellera/parameterize)
 [![Anaconda-Server Badge](https://anaconda.org/acellera/parameterize/badges/downloads.svg)](https://anaconda.org/acellera/parameterize)
 
