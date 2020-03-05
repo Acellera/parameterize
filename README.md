@@ -26,4 +26,4 @@ Tutorial: https://software.acellera.com/docs/latest/parameterize/tutorial.html
 
 ## Citation
 
-R. Galvelis, S. Doerr, J. M. Damas, M. J. Harvey, and G. De Fabritiis, *A Scalable Molecular Force Field Parameterization Method Based on Density Functional Theory and Quantum-Level Machine Learning*, J. Chem. Inf. Model. 2019, 59, 8, 3485-3493. DOI: [10.1021/acs.jcim.9b00439](http://dx.doi.org/10.1021/acs.jcim.9b00439). [arXiv](https://arxiv.org/abs/1907.06952)
+R. Galvelis, S. Doerr, J. M. Damas, M. J. Harvey, and G. De Fabritiis, *A Scalable Molecular Force Field Parameterization Method Based on Density Functional Theory and Quantum-Level Machine Learning*, J. Chem. Inf. Model. 2019, 59, 8, 3485-3493. DOI: [10.1021/acs.jcim.9b00439](http://dx.doi.org/10.1021/acs.jcim.9b00439). arXiv: [1907.06952](https://arxiv.org/abs/1907.06952)
