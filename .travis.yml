@@ -19,11 +19,8 @@ jobs:
       python: 3.7
       env: OSNAME=Linux CONDA_PY=3.7
 
-env:
-  global:
-    - PYTHONHASHSEED=0
-
 before_install:
+
   # Enable conda
   - /opt/conda/bin/conda init bash
   - . ~/.bashrc
@@ -33,12 +30,6 @@ script:
 
   # Set version
   - if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ]; then export BUILD_VERSION=$TRAVIS_TAG; else export BUILD_VERSION=0.0.0; fi
-  - echo "TRAVIS_BRANCH = $TRAVIS_BRANCH"
-  - echo "TRAVIS_TAG    = $TRAVIS_TAG"
-  - echo "TRAVIS_PULL_REQUEST = $TRAVIS_PULL_REQUEST"
-  - echo "TRAVIS_REPO_SLUG = $TRAVIS_REPO_SLUG"
-  - echo "BUILD_VERSION = $BUILD_VERSION"
-  # Always set it to 0 so we don't get a new release at every successful commit
   - export BUILD_NUMBER=0
 
   # Create a build enviroment
@@ -47,10 +38,13 @@ script:
 
   # Build a conda package
   - python ci/travis/insert_placeholder_values.py
-  - conda build --python $TRAVIS_PYTHON_VERSION package/parameterize --no-include-recipe -c acellera -c psi4 -c conda-forge
+  - conda build --python $TRAVIS_PYTHON_VERSION --no-include-recipe
+                -c acellera -c psi4 -c conda-forge
+                package/parameterize
 
   # Create a test environment
-  - conda create -n test -y -c acellera -c psi4 -c conda-forge
+  - conda create -n test -y
+                 -c acellera -c psi4 -c conda-forge
                  --file DEPENDENCIES
                  codecov
                  coverage
