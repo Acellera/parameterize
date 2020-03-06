@@ -51,14 +51,16 @@ script:
 
   # Create a test environment
   - conda create -n test -y -c acellera -c psi4 -c conda-forge
-                 --file DEPENDENCIES python=$TRAVIS_PYTHON_VERSION
+                 --file DEPENDENCIES
+                 codecov
+                 coverage
+                 python=$TRAVIS_PYTHON_VERSION
   - conda activate test
 
   # Install the conda package
   - conda install -y ~/.conda/envs/build/conda-bld/linux-64/parameterize-*.tar.bz2
 
   # Run tests
-  - pip install -q codecov coverage
   - coverage run -m unittest discover --start-directory parameterize --pattern "*.py"
 
 after_success:
