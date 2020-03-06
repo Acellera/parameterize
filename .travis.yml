@@ -22,6 +22,7 @@ jobs:
 before_install:
 
   # Enable conda
+  - sudo rm -rf ~/.conda # Fix conda glitch
   - /opt/conda/bin/conda init bash
   - . ~/.bashrc
   - conda info
