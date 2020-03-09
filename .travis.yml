@@ -1,4 +1,13 @@
 dist: bionic
+addons:
+  apt:
+    # System conda installation: https://docs.conda.io/projects/conda/en/latest/user-guide/install/rpm-debian.html
+    sources:
+      - sourceline: 'deb https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main'
+        key_url: https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc
+    packages:
+      - conda
+
 language: python
 
 jobs:
@@ -9,58 +18,49 @@ jobs:
     - os: linux
       python: 3.7
       env: OSNAME=Linux CONDA_PY=3.7
-# TODO: Uncomment when MacOS comes back (travis-ci/travis-ci#9075)
-#    - os: osx
-#      language: generic
-#      env: TRAVIS_PYTHON_VERSION=3.6 OSNAME=Darwin
-#      before_install:
-#        - brew update
-#        - brew cask uninstall oclint
-#        - brew install gcc
-
-env:
-  global:
-    - MINICONDA_DIR="$HOME/miniconda"
-    - PYTHONHASHSEED=0
 
 before_install:
-  - source ci/travis/install_miniconda.sh
+
+  # Enable conda
+  - sudo rm -rf ~/.conda # Fix conda glitch
+  - /opt/conda/bin/conda init bash
+  - . ~/.bashrc
+  - conda info
 
 script:
-  - source activate test
 
-  - echo "python $TRAVIS_PYTHON_VERSION*" > $HOME/miniconda/envs/test/conda-meta/pinned
-  - conda update --all -y -q
-
+  # Set version
   - if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ]; then export BUILD_VERSION=$TRAVIS_TAG; else export BUILD_VERSION=0.0.0; fi
-  - echo "TRAVIS_BRANCH = $TRAVIS_BRANCH"
-  - echo "TRAVIS_TAG    = $TRAVIS_TAG"
-  - echo "TRAVIS_PULL_REQUEST = $TRAVIS_PULL_REQUEST"
-  - echo "TRAVIS_REPO_SLUG = $TRAVIS_REPO_SLUG"
-  - echo "BUILD_VERSION = $BUILD_VERSION"
-  # Always set it to 0 so we don't get a new release at every successful commit
   - export BUILD_NUMBER=0
 
-  # Install the Conda dependencies parameterize needs
-  - conda install --file DEPENDENCIES -y -c acellera -c psi4 -c conda-forge
+  # Create a build enviroment
+  - conda create -n build -y conda-build
+  - conda activate build
 
+  # Build a conda package
   - python ci/travis/insert_placeholder_values.py
+  - conda build --python $TRAVIS_PYTHON_VERSION --no-include-recipe
+                -c acellera -c psi4 -c conda-forge
+                package/parameterize
 
-  # Build and install parameterize
-  - conda build --python $TRAVIS_PYTHON_VERSION package/parameterize --no-include-recipe -c acellera -c psi4 -c conda-forge
-  - conda install $HOME/miniconda/conda-bld/*-64/parameterize-[0-9]*.tar.bz2 -y -q -c acellera -c psi4 -c conda-forge
+  # Create a test environment
+  - conda create -n test -y
+                 -c acellera -c psi4 -c conda-forge
+                 --file DEPENDENCIES
+                 codecov
+                 coverage
+                 python=$TRAVIS_PYTHON_VERSION
+  - conda activate test
 
-  # Cleaning to reduce amount of space used on disk
-  - conda clean --all -y
+  # Install the conda package
+  - conda install -y ~/.conda/envs/build/conda-bld/linux-64/parameterize-*.tar.bz2
 
   # Run tests
-  - pip install -q codecov coverage
-  - export PYTHONPATH=$TRAVIS_BUILD_DIR:$PYTHONPATH
-  - coverage run -m unittest discover --start-directory ./parameterize --pattern "*.py"
-  - echo "Finished tests"
+  - coverage run -m unittest discover --start-directory parameterize --pattern "*.py"
 
 after_success:
-  - echo "Attempting codecov statistics upload"
+
+  # Upload coverage statistics
   - codecov
 
 deploy:
