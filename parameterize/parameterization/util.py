@@ -23,6 +23,7 @@ def guessElements(mol, method):
     elements["GAFF"] = ["H", "C", "N", "O", "F", "S", "P", "Cl", "Br", "I"]
     elements["GAFF2"] = ["H", "C", "N", "O", "F", "S", "P", "Cl", "Br", "I"]
     elements["ANI-1x"] = ["H", "C", "N", "O"]
+    elements["ANI-2x"] = ["H", "C", "N", "O", "F", "Cl", "S"]
 
     if method not in elements.keys():
         raise ValueError(
