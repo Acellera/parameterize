@@ -12,17 +12,13 @@ language: python
 
 jobs:
   include:
-    - os: linux
-      python: 3.6
-      env: OSNAME=Linux CONDA_PY=3.6
-    - os: linux
-      python: 3.7
-      env: OSNAME=Linux CONDA_PY=3.7
+    - python: 3.6
+    - python: 3.7
 
-before_install:
+install:
 
   # Enable conda
-  - sudo rm -rf ~/.conda # Fix conda glitch
+  - sudo rm -rf ~/.conda # Fix a conda glitch
   - /opt/conda/bin/conda init bash
   - . ~/.bashrc
   - conda info
@@ -63,10 +59,15 @@ after_success:
   # Upload coverage statistics
   - codecov
 
+before_deploy:
+
+  # Create a deployment enviroment
+  - conda create -n deploy -y anaconda-client
+  - conda activate deploy
+
 deploy:
   - provider: script
-    cleanup: false
-    script: bash ci/travis/deploy.sh
+    script: anaconda -t $ANACONDA_TOKEN_BASIC upload -u acellera ~/.conda/envs/build/conda-bld/linux-64/parameterize-*.tar.bz2
     on:
       tags: true
       branch: master
