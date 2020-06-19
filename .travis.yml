@@ -63,10 +63,15 @@ after_success:
   # Upload coverage statistics
   - codecov
 
+before_deploy:
+
+  # Create a deployment enviroment
+  - conda create -n deploy -y anaconda-client
+  - conda activate deploy
+
 deploy:
   - provider: script
-    cleanup: false
-    script: bash ci/travis/deploy.sh
+    script: anaconda -t $ANACONDA_TOKEN_BASIC upload -u acellera ~/.conda/envs/build/conda-bld/linux-64/parameterize-*.tar.bz2
     on:
       tags: true
       branch: master
