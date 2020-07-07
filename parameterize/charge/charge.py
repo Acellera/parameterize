@@ -69,7 +69,9 @@ def fitGasteigerCharges(mol, atom_types=None):
     )
     ComputeGasteigerCharges(sm._mol, throwOnParamFailure=True)
     mol = mol.copy()
-    mol.charge[:] = [atom.GetDoubleProp("_GasteigerCharge") for atom in sm.numAtoms]
+    mol.charge[:] = [
+        atom.GetDoubleProp("_GasteigerCharge") for atom in sm._mol.GetAtoms()
+    ]
 
     return mol
 
