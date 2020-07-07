@@ -445,7 +445,7 @@ def detectChiralCenters(mol, atom_types=None):
     """
 
     from moleculekit.molecule import Molecule
-    from moleculekit.rdkitintegration import _convertMoleculeToRDKitMol
+    from moleculekit.smallmol.smallmol import SmallMol
     from rdkit.Chem import AssignAtomChiralTagsFromStructure, FindMolChiralCenters
 
     if not isinstance(mol, Molecule):
@@ -461,9 +461,11 @@ def detectChiralCenters(mol, atom_types=None):
         htmd_mol.atomtype = atom_types
 
     # Detect chiral centers and assign their labels
-    rdkit_mol = _convertMoleculeToRDKitMol(htmd_mol)
-    AssignAtomChiralTagsFromStructure(rdkit_mol)
-    chiral_centers = FindMolChiralCenters(rdkit_mol, includeUnassigned=True)
+    sm = SmallMol(
+        htmd_mol, fixHs=False, removeHs=False, verbose=False, force_reading=True
+    )
+    AssignAtomChiralTagsFromStructure(sm._mol)
+    chiral_centers = FindMolChiralCenters(sm._mol, includeUnassigned=True)
 
     return chiral_centers
 

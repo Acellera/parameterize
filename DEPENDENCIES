@@ -1,6 +1,6 @@
 numpy>=1.17
 jobqueues
-moleculekit
+moleculekit>=0.3.3
 networkx
 matplotlib
 scikit-learn # Only used for linear regression. consider getting rid

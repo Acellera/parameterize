@@ -48,7 +48,7 @@ def fitGasteigerCharges(mol, atom_types=None):
     array([-0.411509...,  0.205754...,  0.205754...], dtype=float32)
     """
 
-    from moleculekit.rdkitintegration import _convertMoleculeToRDKitMol
+    from moleculekit.smallmol.smallmol import SmallMol
     from rdkit.Chem.rdPartialCharges import ComputeGasteigerCharges
 
     if not isinstance(mol, Molecule):
@@ -64,12 +64,12 @@ def fitGasteigerCharges(mol, atom_types=None):
         htmd_mol.atomtype = atom_types
 
     # Compute and store Gasteiger charges
-    rdkit_mol = _convertMoleculeToRDKitMol(htmd_mol)
-    ComputeGasteigerCharges(rdkit_mol, throwOnParamFailure=True)
+    sm = SmallMol(
+        htmd_mol, fixHs=False, removeHs=False, verbose=False, force_reading=True
+    )
+    ComputeGasteigerCharges(sm._mol, throwOnParamFailure=True)
     mol = mol.copy()
-    mol.charge[:] = [
-        atom.GetDoubleProp("_GasteigerCharge") for atom in rdkit_mol.GetAtoms()
-    ]
+    mol.charge[:] = [atom.GetDoubleProp("_GasteigerCharge") for atom in sm.numAtoms]
 
     return mol
 
