@@ -52,7 +52,7 @@ script:
   - conda install -y ~/.conda/envs/build/conda-bld/linux-64/parameterize-*.tar.bz2
 
   # Run tests
-  - coverage run -m unittest discover --start-directory parameterize --pattern "*.py"
+  - coverage run -m pytest parameterize/*.py parameterize/*/*.py
 
 after_success:
 
