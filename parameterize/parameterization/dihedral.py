@@ -579,13 +579,13 @@ class DihedralFitting:
         finish = time.clock()
         logger.info("Finished parameter fitting in %f s" % (finish - start))
 
+        # Check the offset
         upper_bounds, lower_bounds = self._getBounds(self.numDihedrals)
+        logger.info("Energy offset is {:.6f} kcal/mol".format(vector[-1]))
         if np.isclose(vector[-1], upper_bounds[-1], atol=0.01) or np.isclose(
             vector[-1], lower_bounds[-1], atol=0.01
         ):
-            raise AssertionError(
-                "Fitting hit upper/lower bound of the offset. Please report this issue."
-            )
+            logger.warning("Energy offset hits the upper/lower bound")
 
         # Update parameters
         self.parameters = self._vectorToParams(vector)
