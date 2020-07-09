@@ -132,8 +132,6 @@ class QMBase(ABC, ProtocolInterface):
         --------
 
         >>> from parameterize.qm.base import QMBase
-        ffevaluate module is in beta version
-
         >>> QMBase.substituteBasisSet('F', '3-21G')
         '3-21G'
 
