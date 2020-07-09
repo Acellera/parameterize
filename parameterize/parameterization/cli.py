@@ -283,6 +283,10 @@ def _prepare_molecule(args):
     for name, element in zip(mol.name, mol.element):
         logger.info("    {:6s}: {:2s}".format(name, element))
 
+    # Check hydrogen atoms
+    if 'H' not in mol.element:
+        logger.warning("The molecule might be invalid! There are no hydrogen atoms.")
+
     # Check residue names
     if not np.all(mol.resname == mol.resname[0]):
         raise RuntimeError(
