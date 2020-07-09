@@ -323,12 +323,15 @@ def guessBondType(mol):
             new_name,
         ]
 
+        logger.info('Running "antechamber"')
         with TemporaryFile() as stream:
-            if subprocess.call(cmd, cwd=tmpDir, stdout=stream, stderr=stream) != 0:
-                raise RuntimeError('"antechamber" failed')
+            status = subprocess.call(cmd, cwd=tmpDir, stdout=stream, stderr=stream)
             stream.seek(0)
             for line in stream.readlines():
-                logger.debug(line)
+                logger.info(line)
+            if status != 0:
+                stream.seek(0)
+                raise RuntimeError('"antechamber" failed: {}'.format(stream.read()))
 
         mol.bondtype[:] = Molecule(new_name).bondtype
 

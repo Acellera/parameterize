@@ -163,15 +163,15 @@ def fftype(
                     cmd += ["-c", acCharges]
 
                 # Run antechamber
+                logger.info('Running "antechamber"')
                 with TemporaryFile() as stream:
-                    if (
-                        subprocess.call(cmd, cwd=tmpdir, stdout=stream, stderr=stream)
-                        != 0
-                    ):
-                        raise RuntimeError('"antechamber" failed')
+                    status = subprocess.call(cmd, cwd=tmpdir, stdout=stream, stderr=stream)
                     stream.seek(0)
                     for line in stream.readlines():
-                        logger.debug(line)
+                        logger.info(line)
+                    if status != 0:
+                        stream.seek(0)
+                        raise RuntimeError('"antechamber" failed: {}'.format(stream.read()))
 
                 # Set arguments
                 cmd = [
@@ -189,15 +189,15 @@ def fftype(
                 ]
 
                 # Run parmchk2
+                logger.info('Running "parmchk2"')
                 with TemporaryFile() as stream:
-                    if (
-                        subprocess.call(cmd, cwd=tmpdir, stdout=stream, stderr=stream)
-                        != 0
-                    ):
-                        raise RuntimeError('"parmchk2" failed')
+                    status = subprocess.call(cmd, cwd=tmpdir, stdout=stream, stderr=stream)
                     stream.seek(0)
                     for line in stream.readlines():
-                        logger.debug(line)
+                        logger.info(line)
+                    if status != 0:
+                        stream.seek(0)
+                        raise RuntimeError('"parmchk2" failed: {}'.format(stream.read()))
 
                 # Check if antechamber did changes in atom names (and suggest the user to fix the names)
                 acmol = Molecule(os.path.join(tmpdir, "NEWPDB.PDB"), type="pdb")
@@ -242,15 +242,15 @@ def fftype(
                 ]
 
                 # Run match-type
+                logger.info('Running "match-typer"')
                 with TemporaryFile() as stream:
-                    if (
-                        subprocess.call(cmd, cwd=tmpdir, stdout=stream, stderr=stream)
-                        != 0
-                    ):
-                        raise RuntimeError('"match-typer" failed')
+                    status = subprocess.call(cmd, cwd=tmpdir, stdout=stream, stderr=stream)
                     stream.seek(0)
                     for line in stream.readlines():
-                        logger.debug(line)
+                        logger.info(line)
+                    if status != 0:
+                        stream.seek(0)
+                        raise RuntimeError('"match-typer" failed: {}'.format(stream.read()))
 
                 prm = parmed.charmm.CharmmParameterSet(
                     os.path.join(tmpdir, "mol.rtf"), os.path.join(tmpdir, "mol.prm")
