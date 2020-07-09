@@ -188,15 +188,14 @@ def fftype(
                 ]
 
                 # Run parmchk2
+                logger.info('Running "parmchk2"')
                 with TemporaryFile() as stream:
-                    if (
-                        subprocess.call(cmd, cwd=tmpdir, stdout=stream, stderr=stream)
-                        != 0
-                    ):
-                        raise RuntimeError('"parmchk2" failed')
+                    status = subprocess.call(cmd, cwd=tmpdir, stdout=stream, stderr=stream)
                     stream.seek(0)
                     for line in stream.readlines():
-                        logger.debug(line)
+                        logger.info(line)
+                    if status != 0:
+                        raise RuntimeError('"parmchk2" failed')
 
                 # Check if antechamber did changes in atom names (and suggest the user to fix the names)
                 acmol = Molecule(os.path.join(tmpdir, "NEWPDB.PDB"), type="pdb")
