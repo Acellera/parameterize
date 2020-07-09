@@ -170,7 +170,8 @@ def fftype(
                     for line in stream.readlines():
                         logger.info(line)
                     if status != 0:
-                        raise RuntimeError('"antechamber" failed')
+                        stream.seek(0)
+                        raise RuntimeError('"antechamber" failed: {}'.format(stream.read()))
 
                 # Set arguments
                 cmd = [
@@ -195,7 +196,8 @@ def fftype(
                     for line in stream.readlines():
                         logger.info(line)
                     if status != 0:
-                        raise RuntimeError('"parmchk2" failed')
+                        stream.seek(0)
+                        raise RuntimeError('"parmchk2" failed: {}'.format(stream.read()))
 
                 # Check if antechamber did changes in atom names (and suggest the user to fix the names)
                 acmol = Molecule(os.path.join(tmpdir, "NEWPDB.PDB"), type="pdb")

@@ -174,7 +174,8 @@ def fitChargesWithAntechamber(mol, type="gas", molCharge=None):
             for line in stream.readlines():
                 logger.info(line)
             if status != 0:
-                raise RuntimeError('"antechamber" failed')
+                stream.seek(0)
+                raise RuntimeError('"antechamber" failed: {}'.format(stream.read()))
 
         mol.charge[:] = Molecule(new_name).charge
 
