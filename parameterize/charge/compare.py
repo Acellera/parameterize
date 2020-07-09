@@ -18,7 +18,7 @@ from parameterize.charge import fitGasteigerCharges, fitChargesWithAntechamber, 
 logger = logging.getLogger(__name__)
 
 
-@unittest.skipIf("TRAVIS" in os.environ, "This is a comparison, not a test!")
+@unittest.skip("This is a comparison, not a test!")
 class _ChargeComparison(unittest.TestCase):
     def _run(self, molName):
 
