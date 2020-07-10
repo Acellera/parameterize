@@ -45,6 +45,7 @@ script:
                  --file DEPENDENCIES
                  codecov
                  coverage
+                 pytest>=5
                  python=$TRAVIS_PYTHON_VERSION
   - conda activate test
 
