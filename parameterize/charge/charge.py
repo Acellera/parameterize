@@ -221,8 +221,6 @@ def fitESPCharges(mol, qm, outdir, apply_bounds=True, restraint_factor=0, fixed=
 
     >>> from tempfile import TemporaryDirectory
     >>> from parameterize.qm import Psi4
-    ffevaluate module is in beta version
-
     >>> np.random.seed(20181113)
     >>> with TemporaryDirectory() as tmpDir:
     ...     new_mol, extra = fitESPCharges(mol, Psi4(), tmpDir)

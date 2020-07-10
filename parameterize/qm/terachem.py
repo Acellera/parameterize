@@ -50,21 +50,21 @@ class TeraChem(QMBase):
     --------
 
     Create an object of H2 molecule
-    >>> import os
-    >>> from parameterize.home import home
-    >>> from moleculekit.molecule import Molecule
-    >>> molFile = os.path.join(home('test-qm'), 'H2-0.74.mol2')
-    >>> mol = Molecule(molFile)
+    >> import os
+    >> from parameterize.home import home
+    >> from moleculekit.molecule import Molecule
+    >> molFile = os.path.join(home('test-qm'), 'H2-0.74.mol2')
+    >> mol = Molecule(molFile)
 
     Create a Psi4 object
-    >>> from parameterize.qm import TeraChem
-    >>> qm = TeraChem()
-    >>> qm # doctest: +ELLIPSIS
+    >> from parameterize.qm import TeraChem
+    >> qm = TeraChem()
+    >> qm # doctest: +ELLIPSIS
     <parameterize.qm.terachem.TeraChem object at 0x...>
 
     Run single-point QM calculation of H2 with BLYP and cc-pVDZ
-    >>> from tempfile import TemporaryDirectory
-    >>> with TemporaryDirectory() as tmp:
+    >> from tempfile import TemporaryDirectory
+    >> with TemporaryDirectory() as tmp:
     ...     qm.molecule = mol
     ...     qm.theory = 'BLYP'
     ...     qm.basis = 'cc-pVDZ'
@@ -72,26 +72,26 @@ class TeraChem(QMBase):
     ...     result = qm.run()
 
     The QM results are returned as a list of parameterize.qm.QMResult objects. See parameterize.qm.QMResult documentation for details.
-    >>> result # doctest: +ELLIPSIS
+    >> result # doctest: +ELLIPSIS
     [<parameterize.qm.base.QMResult object at 0x...>]
-    >>> result[0].errored
+    >> result[0].errored
     False
-    >>> result[0].energy # doctest: +ELLIPSIS
+    >> result[0].energy # doctest: +ELLIPSIS
     -728.97068164...
-    >>> result[0].mulliken # doctest: +ELLIPSIS
+    >> result[0].mulliken # doctest: +ELLIPSIS
     [...0.0, ...0.0]
 
     Run the geometry optimization of H2 with BLYP, but change basis to 3-21G.
     NOTE: the `directory` attribut needs to be set to empty or non-existing directory, overwise the previous
     calculation results are read.
-    >>> with TemporaryDirectory() as tmp:
+    >> with TemporaryDirectory() as tmp:
     ...     qm.basis = '3-21G'
     ...     qm.optimize = True
     ...     qm.directory = tmp
     ...     result = qm.run()
 
     The initial coordinates and optimize coordinates of H2 can be compared
-    >>> mol.coords
+    >> mol.coords
     array([[[ 0.  ],
             [ 0.  ],
             [-0.37]],
@@ -99,7 +99,7 @@ class TeraChem(QMBase):
            [[ 0.  ],
             [ 0.  ],
             [ 0.37]]], dtype=float32)
-    >>> result[0].coords
+    >> result[0].coords
     array([[[ 0.        ],
             [ 0.        ],
             [-0.37542403]],
@@ -109,8 +109,8 @@ class TeraChem(QMBase):
             [ 0.37542403]]], dtype=float32)
 
     The QM calculations run using LocalCPUQueue by default, but this can be changed to the others.
-    >>> from jobqueues.slurmqueue import SlurmQueue
-    >>> qm.queue = SlurmQueue() # doctest: +SKIP
+    >> from jobqueues.slurmqueue import SlurmQueue
+    >> qm.queue = SlurmQueue() # doctest: +SKIP
     """
 
     @property

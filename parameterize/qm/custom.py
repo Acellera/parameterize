@@ -48,14 +48,15 @@ class OMMMinimizer(Minimizer):
 
         Examples
         --------
-        >>> from parameterize.parameterization.fftype import fftype
-        >>> from moleculekit.molecule import Molecule
+        >> from parameterize.home import home
+        >> from moleculekit.molecule import Molecule
+        >> from parameterize.parameterization.fftype import fftype
 
-        >>> molFile = os.path.join(home('test-qm'), 'H2O2-90.mol2')
-        >>> mol = Molecule(molFile)
-        >>> prm, mol = fftype(mol, method='GAFF2')
-        >>> mini = OMMMinimizer(mol, prm)
-        >>> minimcoor = mini.minimize(mol.coords, restrained_dihedrals=[0, 1, 6, 12])
+        >> molFile = os.path.join(home('test-qm'), 'H2O2-90.mol2')
+        >> mol = Molecule(molFile)
+        >> prm, mol = fftype(mol, method='GAFF2')
+        >> mini = OMMMinimizer(mol, prm)
+        >> minimcoor = mini.minimize(mol.coords, restrained_dihedrals=[0, 1, 6, 12])
         """
         super().__init__()
 
@@ -244,25 +245,25 @@ class CustomQM(QMBase):
     """
     Imitation of QM calculations with custom class
 
-    >>> import os
-    >>> import numpy as np
-    >>> from tempfile import TemporaryDirectory
-    >>> from parameterize.home import home
-    >>> from moleculekit.dihedral import dihedralAngle
-    >>> from moleculekit.molecule import Molecule
-    >>> from parameterize.qm.custom import CustomQM
-    >>> from acemdai.calculator import AAICalculator
+    >> import os
+    >> import numpy as np
+    >> from tempfile import TemporaryDirectory
+    >> from parameterize.home import home
+    >> from moleculekit.dihedral import dihedralAngle
+    >> from moleculekit.molecule import Molecule
+    >> from parameterize.qm.custom import CustomQM
+    >> from acemdai.calculator import AAICalculator
 
     Create a molecule
-    >>> molFile = os.path.join(home('test-qm'), 'H2O2-90.mol2')
-    >>> mol = Molecule(molFile)
+    >> molFile = os.path.join(home('test-qm'), 'H2O2-90.mol2')
+    >> mol = Molecule(molFile)
 
     Create the AcemdAI calculator
-    >>> networkfile = './mynet.pkl'
-    >>> aceai = AAICalculator(networkfile=networkfile, maxatoms=26, maxneighs=50)
+    >> networkfile = './mynet.pkl'
+    >> aceai = AAICalculator(networkfile=networkfile, maxatoms=26, maxneighs=50)
 
     Run a single-point energy and ESP calculation
-    >>> with TemporaryDirectory() as tmpDir:
+    >> with TemporaryDirectory() as tmpDir:
     ...     qm = CustomQM()
     ...     qm.calculator = aceai
     ...     qm.molecule = mol
@@ -272,19 +273,19 @@ class CustomQM(QMBase):
     4 elements | 10 element pairs | 384 features
     CUDA: Allocating features array (1, 4, 384)
     CUDA: Allocating gradient array (1, 4, 4, 384, 3)
-    >>> qm # doctest: +ELLIPSIS
+    >> qm # doctest: +ELLIPSIS
     <parameterize.qm.custom.CustomCalculator object at ...>
-    >>> result # doctest: +ELLIPSIS
+    >> result # doctest: +ELLIPSIS
     <parameterize.qm.base.QMResult object at ...
-    >>> result.errored
+    >> result.errored
     False
-    >>> result.energy # doctest: +ELLIPSIS
+    >> result.energy # doctest: +ELLIPSIS
     -94970.499...
-    >>> np.rad2deg(dihedralAngle(result.coords[[2, 0, 1, 3], :, 0])) # doctest: +ELLIPSIS
+    >> np.rad2deg(dihedralAngle(result.coords[[2, 0, 1, 3], :, 0])) # doctest: +ELLIPSIS
     89.99...
 
     Run a minimization
-    >>> with TemporaryDirectory() as tmpDir:
+    >> with TemporaryDirectory() as tmpDir:
     ...     qm = CustomQM()
     ...     qm.calculator = aceai
     ...     qm.molecule = mol
@@ -294,13 +295,13 @@ class CustomQM(QMBase):
     4 elements | 10 element pairs | 384 features
     CUDA: Allocating features array (1, 4, 384)
     CUDA: Allocating gradient array (1, 4, 4, 384, 3)
-    >>> result.energy # doctest: +ELLIPSIS
+    >> result.energy # doctest: +ELLIPSIS
     -95173.433...
-    >>> np.rad2deg(dihedralAngle(result.coords[[2, 0, 1, 3], :, 0])) # doctest: +ELLIPSIS
+    >> np.rad2deg(dihedralAngle(result.coords[[2, 0, 1, 3], :, 0])) # doctest: +ELLIPSIS
     125.993...
 
     Run a constrained minimization
-    >>> with TemporaryDirectory() as tmpDir:
+    >> with TemporaryDirectory() as tmpDir:
     ...     qm = CustomQM()
     ...     qm.calculator = aceai
     ...     qm.molecule = mol
@@ -311,9 +312,9 @@ class CustomQM(QMBase):
     4 elements | 10 element pairs | 384 features
     CUDA: Allocating features array (1, 4, 384)
     CUDA: Allocating gradient array (1, 4, 4, 384, 3)
-    >>> result.energy # doctest: +ELLIPSIS
+    >> result.energy # doctest: +ELLIPSIS
     -95170.800...
-    >>> np.rad2deg(dihedralAngle(result.coords[[2, 0, 1, 3], :, 0])) # doctest: +ELLIPSIS
+    >> np.rad2deg(dihedralAngle(result.coords[[2, 0, 1, 3], :, 0])) # doctest: +ELLIPSIS
     89.99...
     """
 

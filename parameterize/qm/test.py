@@ -449,13 +449,9 @@ class _TestPsi4Local(_TestBase, unittest.TestCase):
         super().setUp()
 
 
+@unittest.skip("No SLURM!")
 class _TestPsi4Slurm(_TestBase, unittest.TestCase):
     def setUp(self):
-
-        self.skipTest("No Slurm tests")
-
-        if "TRAVIS" in os.environ:
-            self.skipTest("No Psi4 Slurm tests on Travis")
 
         # For Slurm, the test directory has to be on a shared filesystem
         self.testDir = os.getcwd()
@@ -471,21 +467,17 @@ class _TestPsi4Slurm(_TestBase, unittest.TestCase):
         self.assertIsInstance(self.qm.queue, SlurmQueue)
 
 
+@unittest.skipIf("TeraChem" not in os.environ, "No TeraChem!")
 class _TestTeraChemLocal(_TestBase, unittest.TestCase):
     def setUp(self):
-
-        if "TRAVIS" in os.environ:
-            self.skipTest("No TeraChem tests on Travis")
 
         self.qm = TeraChem()
         super().setUp()
 
 
+@unittest.skip("No Gaussian!")
 class _TestGaussian(_TestBase, unittest.TestCase):
     def setUp(self):
-
-        # TODO finish
-        self.skipTest("No Gaussian, folk!")
 
         self.qm = Gaussian()
         super().setUp()

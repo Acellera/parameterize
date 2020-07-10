@@ -33,13 +33,11 @@ def fixPhosphateTypes(molecule):
 
     >>> mol = Molecule(os.path.join(home('test-param'), '1a1e_ligand.mol2'))
 
-    >>> fitGasteigerCharges(mol) # doctest: +ELLIPSIS
-    Traceback (most recent call last):
-    ...
-    RuntimeError: RDKit error
-    [...]     MOL: warning - O.co2 with non C.2 or S.o2 neighbor.
-    <BLANKLINE>
-    <BLANKLINE>
+    >>> try:
+    ...     fitGasteigerCharges(mol)
+    ... except Exception as e:
+    ...     print(e)
+    ERROR: No Gasteiger Partial Charge parameters for Element: P Mode: 
 
     >>> new_mol = fixPhosphateTypes(mol)
 
