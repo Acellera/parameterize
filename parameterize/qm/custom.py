@@ -14,8 +14,6 @@ import nlopt
 
 from moleculekit.dihedral import dihedralAngle
 from parameterize.qm.base import QMBase, QMResult
-from protocolinterface import val
-
 
 logger = logging.getLogger(__name__)
 
@@ -418,12 +416,12 @@ class CustomQM(QMBase):
         return results
 
 
-if __name__ == "__main__":
-
-    import sys
+# if __name__ == "__main__":
 
     # TODO: Currently doctest is not working correctly, and qmml module is not made available either
     # import doctest
+    #
+    # import sys
     #
     # if doctest.testmod().failed:
     #     sys.exit(1)

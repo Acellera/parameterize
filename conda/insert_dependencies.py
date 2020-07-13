@@ -1,9 +1,6 @@
-import os
-
 with open("DEPENDENCIES", "r") as f:
     deps = f.readlines()
 
-# Fix conda meta.yaml
 with open("conda/meta.yaml", "r") as f:
     text = f.read()
 

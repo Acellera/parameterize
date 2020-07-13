@@ -163,7 +163,7 @@ class Gaussian(QMBase):
                 else:
                     i += 1
 
-        except:
+        except Exception:
             data = None
 
         if data is None:

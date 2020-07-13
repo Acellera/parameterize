@@ -1,7 +1,6 @@
 from parameterize import version
 from parameterize.parameterization.parameterset import findImproperType, getParameter
 import os
-import parmed
 import numpy as np
 import logging
 
