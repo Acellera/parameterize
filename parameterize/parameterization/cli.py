@@ -9,7 +9,7 @@ import argparse
 import logging
 import numpy as np
 
-from parameterize.version import version
+from parameterize import version
 from parameterize.parameterization.fftype import fftypemethods
 
 logger = logging.getLogger(__name__)
