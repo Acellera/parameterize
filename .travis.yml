@@ -33,7 +33,7 @@ script:
   - python ci/travis/insert_placeholder_values.py
   - conda build --python $TRAVIS_PYTHON_VERSION --no-include-recipe
                 -c acellera -c psi4 -c conda-forge
-                package/parameterize
+                conda
 
   # Create a test environment
   - conda create -n test -y

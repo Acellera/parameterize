@@ -4,7 +4,7 @@ with open("DEPENDENCIES", "r") as f:
     deps = f.readlines()
 
 # Fix conda meta.yaml
-with open("package/parameterize/meta.yaml", "r") as f:
+with open("conda/meta.yaml", "r") as f:
     text = f.read()
 
 text = text.replace(
@@ -12,5 +12,5 @@ text = text.replace(
     "".join(["    - {}\n".format(dep.strip()) for dep in deps]),
 )
 
-with open("package/parameterize/meta.yaml", "w") as f:
+with open("conda/meta.yaml", "w") as f:
     f.write(text)
