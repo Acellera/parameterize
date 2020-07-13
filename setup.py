@@ -6,6 +6,5 @@ setup(name='parameterize',
       entry_points={'console_scripts': [
           'parameterize = parameterize.parameterization.cli:main_parameterize'
         ]},
-      packages=find_packages(exclude=['test-data']),
-      zip_safe=False
+      packages=find_packages(exclude=['test-data'])
 )

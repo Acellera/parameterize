@@ -13,11 +13,9 @@ build:
 
 requirements:
   build:
-    - python 
-    - requests
-    
+    - python
   run:
-    - python 
+    - python
 DEPENDENCY_PLACEHOLDER
 
 about:
