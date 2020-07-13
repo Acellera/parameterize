@@ -35,7 +35,6 @@ def readRTF(filename):
     bonds = []
     improper_indices = []
     typeindex_by_type = dict()
-    netcharge = 0.0
 
     aidx = 0
     for l in lines:
@@ -46,9 +45,6 @@ def readRTF(filename):
             element_by_type[at] = k[4]
             typeindex_by_type[at] = int(k[1])
             types.append(at)
-        elif l.startswith("RESI "):
-            k = l.split()
-            netcharge = float(k[2])
         elif l.startswith("ATOM "):
             k = l.split()
             names.append(k[1])
@@ -130,7 +126,6 @@ def readPREPI(mol, prepi):
     # the prepi has the atoms re-ordered. Reorder the info based on the order in the mol
     index_by_name = {name: i for i, name in enumerate(mol.name)}
 
-    types = []
     names = np.array(["" for _ in range(mol.numAtoms)], dtype=object)
     type_by_idx = np.array(["" for _ in range(mol.numAtoms)], dtype=object)
     charge_by_idx = np.zeros(mol.numAtoms, dtype=np.float32)
