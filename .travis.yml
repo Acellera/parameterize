@@ -30,7 +30,7 @@ script:
   - conda activate build
 
   # Build a conda package
-  - python ci/travis/insert_placeholder_values.py
+  - python conda/insert_dependencies.py
   - conda build --python $TRAVIS_PYTHON_VERSION --no-include-recipe
                 -c acellera -c psi4 -c conda-forge
                 conda
