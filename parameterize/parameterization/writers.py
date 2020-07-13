@@ -174,7 +174,6 @@ def writeFRCMOD(mol, parameters, filename, typemap=None):
 
 
 def writePRM(mol, parameters, filename):
-    from parameterize.version import version as parameterizeversion
     from parameterize.util import ensurelist
 
     # for type, val in parameters.atom_types.items():
@@ -265,7 +264,6 @@ def writePRM(mol, parameters, filename):
 
 def writeRTF(mol, parameters, netcharge, filename):
     from moleculekit.periodictable import periodictable_by_number
-    from parameterize.version import version as parameterizeversion
 
     f = open(filename, "w")
     print("* Charmm RTF built by HTMD parameterize version {}".format(version()), file=f)
