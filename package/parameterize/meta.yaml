@@ -1,12 +1,12 @@
 package:
   name: parameterize
-  version: {{ environ.get('BUILD_VERSION', 0 ) }}
+  version: {{ GIT_DESCRIBE_TAG }}
 
 source:
    path: ../..
 
 build:
-  number: {{ environ.get('BUILD_NUMBER', 0 ) }}
+  number: 0
   entry_points:
     - parameterize = parameterize.parameterization.cli:main_parameterize
 

@@ -25,10 +25,6 @@ install:
 
 script:
 
-  # Set version
-  - if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ]; then export BUILD_VERSION=$TRAVIS_TAG; else export BUILD_VERSION=0.0.0; fi
-  - export BUILD_NUMBER=0
-
   # Create a build enviroment
   - conda create -n build -y conda-build
   - conda activate build

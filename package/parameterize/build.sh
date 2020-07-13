@@ -27,8 +27,6 @@ if [ -e "$DIR" ]; then
     cp -r parameterize  $DIR/
     rm -rf $(find "$DIR" -name .git -type d)
     rm -rf $DIR/parameterize/test-data
-    echo "def version():" > $DIR/parameterize/version.py
-    echo "    return \"$PKG_VERSION\"" >> $DIR/parameterize/version.py
 else
     echo "Error: PREFIX not defined"
     exit 1
@@ -38,3 +36,6 @@ cd "$DIR/../../"
 
 chmod -R a+rX "$PREFIX"
 
+cat $SP_DIR/parameterize/__init__.py
+sed -i "s/undefined/$PKG_VERSION/" $SP_DIR/parameterize/__init__.py
+cat $SP_DIR/parameterize/__init__.py

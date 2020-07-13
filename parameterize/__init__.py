@@ -1,9 +1,11 @@
 from parameterize.home import home as __home
-from parameterize.version import version as _version
 import os
 import logging.config
 
-__version__ = _version()
+__version__ = "undefined"
+
+def version():
+    return __version__
 
 try:
     logging.config.fileConfig(
