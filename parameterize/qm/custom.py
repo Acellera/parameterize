@@ -416,7 +416,7 @@ class CustomQM(QMBase):
         return results
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
     # TODO: Currently doctest is not working correctly, and qmml module is not made available either
     # import doctest
