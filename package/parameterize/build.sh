@@ -38,3 +38,6 @@ cd "$DIR/../../"
 
 chmod -R a+rX "$PREFIX"
 
+cat $SP_DIR/parameterize/__init__.py
+sed -i "s/undefined/$PKG_VERSION/" $SP_DIR/parameterize/__init__.py
+cat $SP_DIR/parameterize/__init__.py
