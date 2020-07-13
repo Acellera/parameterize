@@ -7,8 +7,6 @@ logger = logging.getLogger(__name__)
 
 
 def _guessElement(name):
-    import re
-
     name = re.sub("[0-9]*$", "", name)
     name = name.lower().capitalize()
     return name
