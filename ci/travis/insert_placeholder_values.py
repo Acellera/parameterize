@@ -1,4 +1,3 @@
-import subprocess
 import os
 
 with open("DEPENDENCIES", "r") as f:
