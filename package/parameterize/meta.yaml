@@ -7,8 +7,9 @@ source:
 
 build:
   number: 0
-  entry_points:
-    - parameterize = parameterize.parameterization.cli:main_parameterize
+  script:
+    - pip install .
+    - sed -i "s/undefined/$PKG_VERSION/" $SP_DIR/parameterize/__init__.py
 
 requirements:
   build:
