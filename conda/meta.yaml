@@ -1,0 +1,19 @@
+package:
+  name: parameterize
+  version: {{ GIT_DESCRIBE_TAG }}
+
+source:
+   path: ..
+
+build:
+  number: 0
+  script:
+    - pip install .
+    - sed -i "s/undefined/$PKG_VERSION/" $SP_DIR/parameterize/__init__.py
+
+requirements:
+  build:
+    - python
+  run:
+    - python
+DEPENDENCY_PLACEHOLDER
