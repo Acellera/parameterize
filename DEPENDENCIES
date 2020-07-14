@@ -1,18 +1,18 @@
-numpy>=1.17
-jobqueues
-moleculekit>=0.3.3
-networkx
-matplotlib
-scikit-learn # Only used for linear regression. consider getting rid
-parmed
-scipy  # Check how necessary
-pyyaml
-openmm # Check how necessary
-psi4
-rdkit
-nlopt
-match
+ambermini
 dftd3
 ffevaluation
-ambermini
+jobqueues
+match
+matplotlib
+moleculekit>=0.3.3
+networkx
+nlopt
+numpy>=1.17
 openbabel
+openmm # Check how necessary
+parmed
+psi4
+pyyaml
+rdkit
+scikit-learn # Only used for linear regression. consider getting rid
+scipy  # Check how necessary
